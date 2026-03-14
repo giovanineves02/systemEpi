@@ -3,20 +3,28 @@
     <div class="logo-container">
       <div class="logo-icon">
         <img 
-          :src="imageIcon" 
-          alt="Ilustração Icone da equipe" 
+          :src="logo"
+          alt="Imagem logo"
           class="icon-placeholder"
         />
       </div>
-      <h2 class="logo-text">DashEPI</h2>
+      <h2 class="logo-text">SAFETY STOCK EPI</h2>
     </div>
+    <div class="right-options">
+     <div class="Funcionalidades">
+        <h3>Funcionalidades </h3>
+      </div>
+      <div class="Sobre">
+        <h3>Sobre </h3>
+      </div>
+      <div class="contato">
+        <h3>contato</h3>
+      </div>
 
-    <div class="user-container">
-      <router-link to="/login" class="user-icon">
-        <span class="icon-placeholder">👤</span>
-      </router-link>
-      <div class="tooltip">
-        Faça Login!!
+      <div class="user-container">
+        <router-link to="/login" class="user-icon">
+          <span class="icon-placeholder">Login</span>
+        </router-link>
       </div>
     </div>
   </header>
@@ -26,7 +34,7 @@
 export default {
   name: 'Header'
 };
-import imageIcon from '../assets/logo.png';
+import logo from '../assets/logo.png';
 </script>
 
 <style scoped>
@@ -65,6 +73,26 @@ import imageIcon from '../assets/logo.png';
   margin: 0;
 }
 
+.right-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.contato {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.Sobre {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
 .user-container {
   position: relative;
   display: flex;
@@ -73,10 +101,10 @@ import imageIcon from '../assets/logo.png';
 }
 
 .user-icon {
-  background-color: #5c626d;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+  background-color: #c0b1b1;
+  width: 90px;
+  height: 40px;
+  border-radius: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,6 +112,8 @@ import imageIcon from '../assets/logo.png';
   cursor: pointer;
   text-decoration: none;
 }
+
+
 
 .tooltip {
   position: absolute;
@@ -106,6 +136,8 @@ import imageIcon from '../assets/logo.png';
   border-width: 6px;
   border-style: solid;
   border-color: transparent transparent #f05432 transparent;
+  
+
 }
 </style>
 

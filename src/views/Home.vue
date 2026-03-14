@@ -3,19 +3,26 @@
   <div class="home">                                                               <!-- div principal que centraliza o conteúdo -->
 
     <!-- ========== HERO ========== -->
-    <section class="home__hero">                                                   <!-- seção com título, texto e imagem -->
 
-      <div class="home__hero-texto">            
-                               
-        <h1>Sistema de Gestão de EPI</h1>                                         <!-- título principal da página -->
+    <section class="home_menu_info">
+        <div class="home_menu_info-texto">
+            <h2>PAINEL</h2>
+        </div>
+       
+    </section>
+    <section class="home__menu">                                                   <!-- seção com título, texto e imagem -->
+
+      <div class="home__menu-texto">            
+                    
+                                                                                 <!-- título principal da página -->
         <p>Gerencie os EPIs dos seus colaboradores de forma simples e segura.</p> <!-- texto de apresentação -->
       </div>                                                                       <!-- fecha o bloco de texto -->
 
       <div class="home__hero-imagem">                                             <!-- lado direito: imagem ilustrativa -->
-        <img                                                                       <!-- tag de imagem -->
-          src="../assets/hero.png"                                                 <!-- caminho da imagem hero -->
-          alt="Ilustração de gestão de EPI"                                        <!-- texto se a imagem não carregar -->
-          class="home__hero-img"                                                   <!-- classe CSS que estiliza a imagem -->
+        <img                                                                       
+          src="../assets/hero.png"                                               
+          alt="Ilustração de gestão de EPI"                                        
+          class="home__hero-img"                                                   
         />                                                                         <!-- tag img não tem fechamento -->
       </div>                                                                       <!-- fecha o bloco de imagem -->
 
@@ -237,5 +244,15 @@ import Header from '../components/Header.vue';
   line-height: 1.6;                                                                /* espaço entre as linhas */
   margin: 0;                                                                       /* remove margem padrão */
 }
+
+.home_menu_info-texto {
+  display: flex;                                                                   /* texto e imagem lado a lado */
+  align-items: center;                                                             /* centraliza verticalmente */
+  justify-content: center;                                                         /* centraliza horizontalmente */
+  background-color: #555;                                                            /* centraliza verticalmente */
+  gap: 2rem;                                                                       /* espaço entre texto e imagem */
+  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
+}
+
 
 </style>                                                                           /* fecha o bloco de estilo */
