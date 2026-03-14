@@ -2,23 +2,19 @@
   <header class="header">
     <div class="logo-container">
       <div class="logo-icon">
-        <img 
-          :src="logo"
-          alt="Imagem logo"
-          class="icon-placeholder"
-        />
+<img src="../assets/logo.png" alt="Logo Aqui">
       </div>
       <h2 class="logo-text">SAFETY STOCK EPI</h2>
     </div>
-    <div class="right-options">
+    <div class="Funcionalidades">
      <div class="Funcionalidades">
-        <h3>Funcionalidades </h3>
+        <h2>Funcionalidades </h2>
       </div>
       <div class="Sobre">
-        <h3>Sobre </h3>
+        <h2>Sobre </h2>
       </div>
       <div class="contato">
-        <h3>contato</h3>
+        <h2>contato</h2>
       </div>
 
       <div class="user-container">
@@ -42,15 +38,16 @@ import logo from '../assets/logo.png';
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #383e49;
-  padding: 15px 50px;
+  background-color: #FFCC00;
+  padding: 20px 45px;
   color: #ffffff;
 }
 
 .logo-container {
   display: flex;
-  align-items: center;
-  gap: 15px;
+  flex-direction: column;
+
+  gap: 5px;
 }
 
 .logo-icon {
@@ -63,20 +60,23 @@ import logo from '../assets/logo.png';
 }
 
 .logo-icon img {
-  width: 250%;
-  height: 250%;
+  width: 5rem;
+  height: 5rem;
 }
 
 .logo-text {
-  font-size: 1.5rem;
+  font-size: 2rem;  
   font-weight: bold;
-  margin: 0;
+  margin-right: 16px;
+  color: black;
 }
 
-.right-options {
+.Funcionalidades {
   display: flex;
   gap: 1rem;
   align-items: center;
+   font-size: 1.5rem;
+   color: black;
 }
 
 .contato {
@@ -84,6 +84,7 @@ import logo from '../assets/logo.png';
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  font-size: 1.5rem;
 }
 
 .Sobre {
@@ -91,6 +92,7 @@ import logo from '../assets/logo.png';
   flex-direction: column;
   align-items: center;
   gap: 5px;
+   font-size: 1.5rem;
 }
 
 .user-container {
@@ -101,16 +103,17 @@ import logo from '../assets/logo.png';
 }
 
 .user-icon {
-  background-color: #c0b1b1;
-  width: 90px;
-  height: 40px;
+  background-color: #000000;
+  width: 10rem;
+  height: 4rem;
   border-radius: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
   text-decoration: none;
+  color: white
 }
 
 

@@ -4,23 +4,21 @@
 
     <!-- ========== HERO ========== -->
 
-    <section class="home_menu_info">
-        <div class="home_menu_info-texto">
-            <h2>PAINEL</h2>
-        </div>
-       
-    </section>
     <section class="home__menu">                                                   <!-- seção com título, texto e imagem -->
 
-      <div class="home__menu-texto">            
-                    
-                                                                                 <!-- título principal da página -->
-        <p>Gerencie os EPIs dos seus colaboradores de forma simples e segura.</p> <!-- texto de apresentação -->
-      </div>                                                                       <!-- fecha o bloco de texto -->
+      <div class="home__menu-texto">                                                                                     <!-- lado esquerdo: título principal da página -->
+        <h1>Sistema de Controle de EPIs<br> para Instituições de Ensino</h1> 
+        <p>Gerencie entregas, validade e rastreabilidade de <br>equipamentos de proteção individual de forma <br> simples e eficiente</p>   <!-- texto de apresentação -->
+            <div class="button_Comece_agora">
+        <router-link to="/login" class="start_now">
+          <span class="icon-placeholder">Comece agora</span>
+        </router-link>
+      </div>
+      </div>                                                               <!-- fecha o bloco de texto -->
 
       <div class="home__hero-imagem">                                             <!-- lado direito: imagem ilustrativa -->
         <img                                                                       
-          src="../assets/hero.png"                                               
+          src="../assets/landing.png"                                               
           alt="Ilustração de gestão de EPI"                                        
           class="home__hero-img"                                                   
         />                                                                         <!-- tag img não tem fechamento -->
@@ -118,8 +116,21 @@ import Header from '../components/Header.vue';
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
 }
 
+.home__menu {
+  display: flex;                                                                   /* texto e imagem lado a lado */
+  align-items: center;                                                             /* centraliza verticalmente */
+  justify-content: space-between;                                                  /* texto à esquerda, imagem à direita */
+  gap: 0;                                                                          /* sem espaço entre texto e imagem */
+  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
+  width: 100vw;                                                                    /* largura total da viewport */
+  margin-left: calc(-50vw + 50%);                                                  /* centraliza o full width */
+  position: relative;                                                              /* para posicionamento */
+}
+
 .home__hero-texto { flex: 1; }                                                    /* ocupa metade do espaço */
-.home__hero-imagem { flex: 1; }                                                   /* ocupa metade do espaço */
+.home__hero-imagem { 
+  margin-left: auto; 
+}
 
 /* estilo do <h1> dentro de .home__hero-texto */
 .home__hero-texto h1 {
@@ -137,8 +148,9 @@ import Header from '../components/Header.vue';
 
 /* estilo do <img class="home__hero-img"> */
 .home__hero-img {
-  width: 100%;                                                                     /* ocupa toda a largura do bloco */
-  border-radius: 12px;                                                             /* cantos arredondados */
+  width: 50%;                                                                     /* ocupa 80% da largura do bloco */
+  border-radius: 50px;     
+  justify-content: right;                                                        /* cantos arredondados */
 }
 
 /* estilo do <section class="home__cards"> */
@@ -253,6 +265,25 @@ import Header from '../components/Header.vue';
   gap: 2rem;                                                                       /* espaço entre texto e imagem */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
 }
+.start_now {
+  background-color: #000000;
+  width: 120px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+
+}
+.home__menu-texto {
+  margin-left: 50rem; 
+
+    
+}                                                                             
 
 
-</style>                                                                           /* fecha o bloco de estilo */
+</style>                                                                           
