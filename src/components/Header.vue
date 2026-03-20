@@ -30,23 +30,26 @@
 export default {
   name: 'Header'
 };
-import logo from '../assets/logo.png';
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;                                                        /* inclui padding e border na largura total */
+  margin: 0;                                                                      /* remove margens padrão */
+  padding: 0;                                                                     /* remove espaçamento interno padrão */
+}                                                                  /* CSS só vale neste componente */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   background-color: #FFCC00;
   padding: 20px 45px;
-  color: #ffffff;
+  height: 6rem;
+  
 }
 
 .logo-container {
   display: flex;
   flex-direction: column;
-
   gap: 5px;
 }
 
@@ -56,26 +59,28 @@ import logo from '../assets/logo.png';
   height: 40px;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .logo-icon img {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
+  object-fit: contain;
 }
 
 .logo-text {
-  font-size: 2rem;  
+  font-size: 1.2rem;  
   font-weight: bold;
   margin-right: 16px;
   color: black;
+  text-align: center;
 }
 
 .Funcionalidades {
   display: flex;
-  gap: 1rem;
+  gap: 5rem;
   align-items: center;
-   font-size: 1.5rem;
+   font-size: 1rem;
    color: black;
 }
 
@@ -84,7 +89,7 @@ import logo from '../assets/logo.png';
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 .Sobre {
@@ -92,7 +97,7 @@ import logo from '../assets/logo.png';
   flex-direction: column;
   align-items: center;
   gap: 5px;
-   font-size: 1.5rem;
+   font-size: 1rem;
 }
 
 .user-container {
@@ -104,8 +109,8 @@ import logo from '../assets/logo.png';
 
 .user-icon {
   background-color: #000000;
-  width: 10rem;
-  height: 4rem;
+  width: 8rem;
+  height: 3rem;
   border-radius: 5%;
   display: flex;
   justify-content: center;

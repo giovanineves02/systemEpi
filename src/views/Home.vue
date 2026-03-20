@@ -9,11 +9,9 @@
       <div class="home__menu-texto">                                                                                     <!-- lado esquerdo: título principal da página -->
         <h1>Sistema de Controle de EPIs<br> para Instituições de Ensino</h1> 
         <p>Gerencie entregas, validade e rastreabilidade de <br>equipamentos de proteção individual de forma <br> simples e eficiente</p>   <!-- texto de apresentação -->
-            <div class="button_Comece_agora">
         <router-link to="/login" class="start_now">
-          <span class="icon-placeholder">Comece agora</span>
+           <button class="button_Comece_agora">Comece agora</button>
         </router-link>
-      </div>
       </div>                                                               <!-- fecha o bloco de texto -->
 
       <div class="home__hero-imagem">                                             <!-- lado direito: imagem ilustrativa -->
@@ -29,30 +27,24 @@
     <!-- ========== CARDS DE RESUMO ========== -->
     <section class="home__cards">                                                  <!-- seção com os 4 cards de números -->
 
-      <div class="card">                                                           <!-- card: total de EPIs -->
-        <span class="card__icone">🪖</span>                                       <!-- ícone do card -->
-        <span class="card__numero">124</span>                                     <!-- número em destaque -->
-        <span class="card__label">Total de EPIs</span>                            <!-- legenda do número -->
+      <div class="card">                                                           <!-- card: plano inicial -->
+                    
+        <span class="card__numero">Inicial</span>                                     <!-- plano em destaque -->
+        <span class="card__label">R$50/mês</span>
+       <span class="card__label">- Lançamento de EPI</span>
+        <span class="card__label">- Notificação de vencimento</span>
+        <span class="card__label">- Lançamento de fornecedores</span>                                       <!-- preço do plano -->
       </div>                                                                       <!-- fecha o card -->
 
-      <div class="card">                                                           <!-- card: colaboradores -->
-        <span class="card__icone">👷</span>                                       <!-- ícone do card -->
-        <span class="card__numero">48</span>                                      <!-- número em destaque -->
-        <span class="card__label">Colaboradores</span>                            <!-- legenda do número -->
+      <div class="card">                                                           <!-- card: plano intermediário -->                                 
+        <span class="card__numero">Intermediário</span>                                      <!-- plano em destaque -->
+        <span class="card__label">R$150/mês</span>                            <!-- preço do plano -->
       </div>                                                                       <!-- fecha o card -->
 
-      <div class="card">                                                           <!-- card: entregas realizadas -->
-        <span class="card__icone">📦</span>                                       <!-- ícone do card -->
-        <span class="card__numero">89</span>                                      <!-- número em destaque -->
-        <span class="card__label">Entregas realizadas</span>                      <!-- legenda do número -->
+      <div class="card">                                                           <!-- card: plano avançado -->
+        <span class="card__numero">Avançado</span>                                      <!-- plano em destaque -->
+        <span class="card__label">R$300/mês</span>                       <!-- preço do plano -->
       </div>                                                                       <!-- fecha o card -->
-
-      <div class="card card--alerta">                                             <!-- card: EPIs vencendo (com destaque laranja) -->
-        <span class="card__icone">⚠️</span>                                       <!-- ícone de alerta -->
-        <span class="card__numero">7</span>                                       <!-- número em destaque -->
-        <span class="card__label">EPIs vencendo</span>                            <!-- legenda do número -->
-      </div>                                                                       <!-- fecha o card de alerta -->
-
     </section>                                                                     <!-- fecha a seção de cards -->
 
     <!-- ========== COMO USAR ========== -->
@@ -99,13 +91,19 @@ import Header from '../components/Header.vue';
 </script>
 
 
-<style scoped>                                                                     /* CSS só vale neste componente */
+<style scoped>   
+* {
+  box-sizing: border-box;                                                        /* inclui padding e border na largura total */
+  margin: 0;                                                                      /* remove margens padrão */
+  padding: 0;                                                                     /* remove espaçamento interno padrão */
+}                                                                  /* CSS só vale neste componente */
 
 /* estilo do <div class="home"> */
 .home {
-  max-width: 1100px;                                                               /* largura máxima da página */
-  margin: 0 auto;                                                                  /* centraliza na tela */
-  padding: 2rem;                                                                   /* espaço interno */
+  max-width: auto;                                                               /* largura máxima da página */
+  margin: auto;                                                                  /* centraliza na tela */
+  padding: 2rem;     
+  background-color: #FFFDF2;                                                              /* espaço interno */
 }
 
 /* estilo do <section class="home__hero"> */
@@ -122,43 +120,47 @@ import Header from '../components/Header.vue';
   justify-content: space-between;                                                  /* texto à esquerda, imagem à direita */
   gap: 0;                                                                          /* sem espaço entre texto e imagem */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-  width: 100vw;                                                                    /* largura total da viewport */
+                                                                   /* largura total da viewport */
   margin-left: calc(-50vw + 50%);                                                  /* centraliza o full width */
-  position: relative;                                                              /* para posicionamento */
+  position: relative;  
+  background-color: #FFFDF2;                                                            /* para posicionamento */
 }
 
 .home__hero-texto { flex: 1; }                                                    /* ocupa metade do espaço */
 .home__hero-imagem { 
-  margin-left: auto; 
+  margin-left: 20rem ;
+  width: 180rem;   
 }
 
-/* estilo do <h1> dentro de .home__hero-texto */
-.home__hero-texto h1 {
-  font-size: 28px;                                                                 /* tamanho do título */
-  color: #1E3A5F;                                                                  /* azul escuro institucional */
-  margin-bottom: 1rem;                                                             /* espaço abaixo do título */
+/* estilo do <h1> dentro de .home__menu-texto */
+.home__menu-texto h1 {
+  font-size: 4rem;                                                                 /* tamanho do título */
+  color: #000000;                                                                  /* azul escuro institucional */
+  margin-bottom: 1rem;                                                             /* espaço aumentado abaixo do título */
 }
 
-/* estilo do <p> dentro de .home__hero-texto */
-.home__hero-texto p {
-  font-size: 15px;                                                                 /* tamanho do texto */
-  color: #555;                                                                     /* cinza médio */
+/* estilo do <p> dentro de .home__menu-texto */
+.home__menu-texto p {
+  font-size: 2rem;                                                                 /* tamanho do texto */
+  color: #000000;                                                                     /* cinza médio */
   line-height: 1.7;                                                                /* espaço entre linhas */
+  margin-bottom: 2em;                                                           /* espaço aumentado abaixo do parágrafo */
 }
 
 /* estilo do <img class="home__hero-img"> */
 .home__hero-img {
-  width: 50%;                                                                     /* ocupa 80% da largura do bloco */
-  border-radius: 50px;     
-  justify-content: right;                                                        /* cantos arredondados */
+  width: 50rem;                                                                     /* ocupa 80% da largura do bloco */
+  border-radius: 5rem;     
 }
 
 /* estilo do <section class="home__cards"> */
 .home__cards {
   display: grid;                                                                   /* organiza os cards em grade */
-  grid-template-columns: repeat(4, 1fr);                                           /* cria 4 colunas de tamanho igual */
-  gap: 1.5rem;                                                                     /* espaço entre os cards */
+  grid-template-columns: repeat(3, 1fr);                                           /* cria 3 colunas de tamanho igual */
+  gap: 5rem;                                                                     /* espaço entre os cards */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
+  margin-left: auto;                                                               /* margem esquerda automática */
+  margin-right: auto;                                                              /* margem direita automática */
 }
 
 /* estilo do <div class="card"> */
@@ -193,14 +195,15 @@ import Header from '../components/Header.vue';
 
 /* estilo do <span class="card__label"> */
 .card__label {
-  font-size: 13px;                                                                 /* texto pequeno */
-  color: #555;                                                                     /* cinza médio */
-  margin-top: 4px;                                                                 /* espaço acima do texto */
+  font-size: 2rem;                                                                 /* texto maior */
+  color: #000000;                                                                     /* cinza médio */
+  margin-top: 10px;                                                                /* espaço aumentado acima do texto */
+  line-height: 1.8;                                                                /* espaçamento entre linhas */
 }
 
 /* estilo do <section class="home__instrucoes"> */
 .home__instrucoes {
-  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
+  margin-bottom: 4rem;                                                             /* espaço abaixo da seção */
 }
 
 /* estilo do <h2 class="home__instrucoes-titulo"> */
@@ -265,25 +268,28 @@ import Header from '../components/Header.vue';
   gap: 2rem;                                                                       /* espaço entre texto e imagem */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
 }
-.start_now {
+
+.home__menu-texto {
+  margin-left: 10rem; 
+  font-size: 1.75rem;
+  width: 100%;
+
+    
+}        
+.button_Comece_agora {
   background-color: #000000;
-  width: 120px;
+  width: 10rem;
   height: 40px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   cursor: pointer;
   text-decoration: none;
   color: white;
 
-}
-.home__menu-texto {
-  margin-left: 50rem; 
-
-    
-}                                                                             
+}                                                                     
 
 
 </style>                                                                           
