@@ -69,41 +69,7 @@
         <button class="button_solicitar_orcamento3">Comece agora</button>                                  
       </div>                                                                     <!-- fecha o card -->
     </section>                                                                     <!-- fecha a seção de cards -->
-
-    <!-- ========== COMO USAR ========== -->
-    <section class="home__instrucoes">                                            <!-- seção com os 4 passos de uso -->
-
-      <h2 class="home__instrucoes-titulo">Como usar o sistema</h2>               <!-- título da seção -->
-
-      <div class="home__passos">                                                  <!-- grade com os 4 passos -->
-
-        <div class="passo">                                                        <!-- passo 1 -->
-          <span class="passo__numero">1</span>                                    <!-- círculo com o número -->
-          <h3>Cadastre os colaboradores</h3>                                      <!-- título do passo -->
-          <p>Acesse o menu Colaboradores e registre cada funcionário com seus dados.</p> <!-- descrição -->
-        </div>                                                                     <!-- fecha o passo 1 -->
-
-        <div class="passo">                                                        <!-- passo 2 -->
-          <span class="passo__numero">2</span>                                    <!-- círculo com o número -->
-          <h3>Cadastre os EPIs</h3>                                               <!-- título do passo -->
-          <p>Vá em Equipamentos e adicione os EPIs disponíveis com validade e quantidade.</p> <!-- descrição -->
-        </div>                                                                     <!-- fecha o passo 2 -->
-
-        <div class="passo">                                                        <!-- passo 3 -->
-          <span class="passo__numero">3</span>                                    <!-- círculo com o número -->
-          <h3>Registre as entregas</h3>                                           <!-- título do passo -->
-          <p>Em Entregas, vincule o EPI ao colaborador e registre a data de entrega.</p> <!-- descrição -->
-        </div>                                                                     <!-- fecha o passo 3 -->
-
-        <div class="passo">                                                        <!-- passo 4 -->
-          <span class="passo__numero">4</span>                                    <!-- círculo com o número -->
-          <h3>Acompanhe os relatórios</h3>                                        <!-- título do passo -->
-          <p>Monitore validades e histórico de entregas pelo menu Relatórios.</p> <!-- descrição -->
-        </div>                                                                     <!-- fecha o passo 4 -->
-
-      </div>                                                                       <!-- fecha a grade de passos -->
-
-    </section>                                                                     <!-- fecha a seção de instruções -->
+                                                                <!-- fecha a seção de instruções -->
 
   </div>                                                                           <!-- fecha a div principal -->
 
@@ -157,14 +123,14 @@ import Header from '../components/Header.vue';
 
 /* estilo do <h1> dentro de .home__menu-texto */
 .home__menu-texto h1 {
-  font-size: 4rem;                                                                 /* tamanho do título */
+  font-size: 3rem;                                                                 /* tamanho do título */
   color: #000000;                                                                  /* azul escuro institucional */
-  margin-bottom: 1rem;                                                             /* espaço aumentado abaixo do título */
+  margin-bottom: 2rem;                                                             /* espaço aumentado abaixo do título */
 }
 
 /* estilo do <p> dentro de .home__menu-texto */
 .home__menu-texto p {
-  font-size: 2rem;                                                                 /* tamanho do texto */
+  font-size: 1.5rem;                                                                 /* tamanho do texto */
   color: #000000;                                                                     /* cinza médio */
   line-height: 1.7;                                                                /* espaço entre linhas */
   margin-bottom: 2em;                                                           /* espaço aumentado abaixo do parágrafo */
