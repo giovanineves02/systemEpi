@@ -29,22 +29,45 @@
 
       <div class="card">                                                           <!-- card: plano inicial -->
                     
-        <span class="card__numero">Inicial</span>                                     <!-- plano em destaque -->
-        <span class="card__label">R$50/mês</span>
-       <span class="card__label">- Lançamento de EPI</span>
-        <span class="card__label">- Notificação de vencimento</span>
-        <span class="card__label">- Lançamento de fornecedores</span>                                       <!-- preço do plano -->
+        <span class="card__numero1">Inicial</span>                                     <!-- plano em destaque -->
+        <div class="card__preco">
+          <span class="card__valor1">R$50</span>
+          <span class="card__valor4">/mês</span>
+        </div>
+       <span class="card__label1">- Lançamento de EPI</span>
+        <span class="card__label2">- Notificação de vencimento</span>
+        <span class="card__label3">- Lançamento de fornecedores</span> 
+         <button class="button_solicitar_orcamento1">Comece agora</button>                                          <!-- preço do plano -->
       </div>                                                                       <!-- fecha o card -->
 
-      <div class="card">                                                           <!-- card: plano intermediário -->                                 
-        <span class="card__numero">Intermediário</span>                                      <!-- plano em destaque -->
-        <span class="card__label">R$150/mês</span>                            <!-- preço do plano -->
-      </div>                                                                       <!-- fecha o card -->
+      <div class="card2">                                                           <!-- card: plano inicial -->
+                    
+        <span class="card__numero2">Intermediário</span>                                     <!-- plano em destaque -->
+        <div class="card__preco">
+          <span class="card__valor1">R$150</span>
+          <span class="card__valor4">/mês</span>
+        </div>
+       <span class="card__label1">- Lançamento de EPI</span>
+        <span class="card__label2">- Notificação de vencimento</span>
+        <span class="card__label3">- Lançamento de fornecedores</span>    
+        <span class="card__label3">- API de Integração</span>    
+        <button class="button_solicitar_orcamento2">Comece agora</button>                                 
+      </div>                                                                          <!-- fecha o card -->
 
-      <div class="card">                                                           <!-- card: plano avançado -->
-        <span class="card__numero">Avançado</span>                                      <!-- plano em destaque -->
-        <span class="card__label">R$300/mês</span>                       <!-- preço do plano -->
-      </div>                                                                       <!-- fecha o card -->
+      <div class="card3">                                                           <!-- card: plano inicial -->
+                    
+        <span class="card__numero3">Avançado</span>                                     <!-- plano em destaque -->
+        <div class="card__preco">
+          <span class="card__valor1">R$300</span>
+          <span class="card__valor4">/mês</span>
+        </div>
+       <span class="card__label1">- Lançamento de EPI</span>
+        <span class="card__label2">- Notificação de vencimento</span>
+        <span class="card__label3">- Lançamento de fornecedores</span>    
+        <span class="card__label3">- API de Integração</span>       
+        <span class="card__label3">- 16h Treinamento Próprio</span>   
+        <button class="button_solicitar_orcamento3">Comece agora</button>                                  
+      </div>                                                                     <!-- fecha o card -->
     </section>                                                                     <!-- fecha a seção de cards -->
 
     <!-- ========== COMO USAR ========== -->
@@ -164,7 +187,7 @@ import Header from '../components/Header.vue';
 }
 
 /* estilo do <div class="card"> */
-.card {
+.card, .card3 {
   display: flex;                                                                   /* empilha os filhos */
   flex-direction: column;                                                          /* ícone, número e label um abaixo do outro */
   align-items: center;                                                             /* centraliza horizontalmente */
@@ -172,6 +195,22 @@ import Header from '../components/Header.vue';
   background: #ffffff;                                                             /* fundo branco */
   border: 1px solid #E2E8F0;                                                       /* borda cinza clara */
   border-radius: 12px;                                                             /* cantos arredondados */
+  min-height: 500px;                                                               /* altura mínima para alinhar botões */
+  justify-content: space-between;                                                  /* distribui espaço entre elementos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);                                       /* sombra suave */
+}
+
+.card2 {
+  display: flex;                                                                   /* empilha os filhos */
+  flex-direction: column;                                                          /* ícone, número e label um abaixo do outro */
+  align-items: center;                                                             /* centraliza horizontalmente */
+  padding: 1.5rem;                                                                 /* espaço interno do card */
+  background: #000000;                                                             /* fundo branco */
+  border: 1px solid #ffffff;                                                       /* borda cinza clara */
+  border-radius: 12px;    
+  min-height: 500px;                                                               /* altura mínima para alinhar botões */
+  justify-content: space-between;                                                  /* distribui espaço entre elementos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);                                       /* sombra mais intensa para card escuro */
 }
 
 /* estilo do <div class="card card--alerta"> */
@@ -187,10 +226,10 @@ import Header from '../components/Header.vue';
 }
 
 /* estilo do <span class="card__numero"> */
-.card__numero {
-  font-size: 28px;                                                                 /* número grande em destaque */
+.card__numero1, .card__numero2, .card__numero3 {
+  font-size: 2rem;                                                                 /* número grande em destaque */
   font-weight: 700;                                                                /* número em negrito */
-  color: #1E3A5F;                                                                  /* azul escuro */
+  color: #000000;                                                                  /* azul escuro */
 }
 
 /* estilo do <span class="card__label"> */
@@ -279,7 +318,7 @@ import Header from '../components/Header.vue';
 .button_Comece_agora {
   background-color: #000000;
   width: 10rem;
-  height: 40px;
+  height: 3rem;
   border-radius: 10px;
   display: flex;
   justify-content: center;
@@ -289,7 +328,87 @@ import Header from '../components/Header.vue';
   text-decoration: none;
   color: white;
 
-}                                                                     
+}                  
 
+
+
+.card__label1 {
+  font-size: 2rem;
+  color: #000000;
+  margin-top: 4rem;
+  gap:  1.75rem;
+}
+
+.card__label2 {
+  font-size: 2rem;
+  color: #000000;
+  margin-top: 10px;
+  gap:  1.75rem;
+}
+.card__label3 {
+  font-size: 2rem;
+  color: #000000;
+  margin-top: 10px;
+  gap: 1.75rem;
+}
+
+.card2 .card__numero2,
+.card2 .card__valor1,
+.card2 .card__valor4,
+.card2 .card__label1,
+.card2 .card__label2,
+.card2 .card__label3 {
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.card .card__valor1 {
+  color: #000000;
+  font-size: 2rem;
+}
+.card3 .card__valor1 {
+  color: #000000;
+  font-size: 2rem;
+}
+
+.card__preco {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.2rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.button_solicitar_orcamento1 , .button_solicitar_orcamento3{
+  background-color: #000000;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+    margin-top: 3rem;
+}
+
+.button_solicitar_orcamento2 {
+  background-color: #ffffff;
+  width: 10rem;
+  height: 3rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  gap: 2rem;
+  margin-top: 2rem;
+}
 
 </style>                                                                           
