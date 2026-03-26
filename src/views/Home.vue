@@ -68,15 +68,60 @@
         <span class="card__label3">- 16h Treinamento Próprio</span>   
         <button class="button_solicitar_orcamento3">Comece agora</button>                                  
       </div>                                                                     <!-- fecha o card -->
-    </section>                                                                     <!-- fecha a seção de cards -->
-                                                                <!-- fecha a seção de instruções -->
+    </section>       
+    
+    <section class="Cards_funcionalidades">
+      <div class="first_card_funcionalidades">
+        <h1>SISTEMA NA PRÁTICA!</h1>
+      </div>
+
+      <div class="funcionalidades_grid">
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">📦</div>
+          <h3>Controle de Estoque</h3>
+          <p>Gerenciamento completo de EPIs com rastreamento de entrada, saída e disponibilidade em tempo real</p>
+        </div>
+
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">⏰</div>
+          <h3>Notificação de Vencimento</h3>
+          <p>Alertas automáticos para EPIs próximos do vencimento, garantindo segurança e conformidade</p>
+        </div>
+
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">👥</div>
+          <h3>Gestão de Usuários</h3>
+          <p>Controle de permissões e perfis de acesso para diferentes tipos de usuários do sistema</p>
+        </div>
+
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">📊</div>
+          <h3>Relatórios e Análises</h3>
+          <p>Gráficos e relatórios detalhados sobre uso, consumo e padrões de EPIs na instituição</p>
+        </div>
+
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">🏢</div>
+          <h3>Gestão de Fornecedores</h3>
+          <p>Cadastro e rastreamento de fornecedores, histórico de compras e avaliação de performance</p>
+        </div>
+
+        <div class="card_funcionalidade">
+          <div class="icon_funcionalidade">📱</div>
+          <h3>API de Integração</h3>
+          <p>Integração com seus sistemas existentes através de API robusta e documentada</p>
+        </div>
+      </div>
+    </section>
+                                                               
 
   </div>                                                                           <!-- fecha a div principal -->
-
+<Footer />
 </template>          
 
 <script setup>
 import Header from '../components/Header.vue';
+import Footer from '../components/Footer.vue';
 </script>
 
 
@@ -109,7 +154,6 @@ import Header from '../components/Header.vue';
   justify-content: space-between;                                                  /* texto à esquerda, imagem à direita */
   gap: 0;                                                                          /* sem espaço entre texto e imagem */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-                                                                   /* largura total da viewport */
   margin-left: calc(-50vw + 50%);                                                  /* centraliza o full width */
   position: relative;  
   background-color: #FFFDF2;                                                            /* para posicionamento */
@@ -117,8 +161,9 @@ import Header from '../components/Header.vue';
 
 .home__hero-texto { flex: 1; }                                                    /* ocupa metade do espaço */
 .home__hero-imagem { 
-  margin-left: 20rem ;
-  width: 180rem;   
+  width: 80%;
+  display: flex;
+  justify-content: center;
 }
 
 /* estilo do <h1> dentro de .home__menu-texto */
@@ -138,7 +183,8 @@ import Header from '../components/Header.vue';
 
 /* estilo do <img class="home__hero-img"> */
 .home__hero-img {
-  width: 50rem;                                                                     /* ocupa 80% da largura do bloco */
+  width: 100%;
+  height: auto;
   border-radius: 5rem;     
 }
 
@@ -163,7 +209,21 @@ import Header from '../components/Header.vue';
   border-radius: 12px;                                                             /* cantos arredondados */
   min-height: 500px;                                                               /* altura mínima para alinhar botões */
   justify-content: space-between;                                                  /* distribui espaço entre elementos */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);                                       /* sombra suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+  transition: transform 0.3s ease, box-shadow 0.3s ease;    
+                                   /* sombra suave */
+}
+.card3:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.card2:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card2 {
@@ -195,8 +255,11 @@ import Header from '../components/Header.vue';
 .card__numero1, .card__numero2, .card__numero3 {
   font-size: 2rem;                                                                 /* número grande em destaque */
   font-weight: 700;                                                                /* número em negrito */
-  color: #000000;                                                                  /* azul escuro */
-}
+  color: #000000;     
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}                                                             /* azul escuro */
+
 
 /* estilo do <span class="card__label"> */
 .card__label {
@@ -274,6 +337,67 @@ import Header from '../components/Header.vue';
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
 }
 
+/* Estilos para Cards de Funcionalidades */
+.Cards_funcionalidades {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
+
+.first_card_funcionalidades {
+  width: 100%;
+  text-align: center;
+}
+
+.first_card_funcionalidades h1 {
+  font-size: 2.5rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+.funcionalidades_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+}
+
+.card_funcionalidade {
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card_funcionalidade:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.icon_funcionalidade {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.card_funcionalidade h3 {
+  font-size: 1.5rem;
+  color: #000000;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.card_funcionalidade p {
+  font-size: 1rem;
+  color: #555555;
+  line-height: 1.6;
+}
+
 .home__menu-texto {
   margin-left: 10rem; 
   font-size: 1.75rem;
@@ -286,7 +410,6 @@ import Header from '../components/Header.vue';
   width: 10rem;
   height: 3rem;
   border-radius: 10px;
-  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
@@ -375,6 +498,45 @@ import Header from '../components/Header.vue';
   color: rgb(0, 0, 0);
   gap: 2rem;
   margin-top: 2rem;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .home__menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .home__menu-texto {
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .home__hero-imagem {
+    width: 80%;
+  }
+
+  .home__cards {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .Cards_funcionalidades {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .funcionalidades_grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .first_card_funcionalidades h1 {
+    font-size: 1.75rem;
+  }
+
 }
 
 </style>                                                                           
