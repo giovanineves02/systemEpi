@@ -24,7 +24,8 @@
 
     </section>                                                                     <!-- fecha a seção hero -->
 
-    <!-- ========== CARDS DE RESUMO ========== -->
+    <div class="section__divider"></div>
+
     <section class="home__cards">                                                  <!-- seção com os 4 cards de números -->
 
       <div class="card">                                                           <!-- card: plano inicial -->
@@ -70,6 +71,8 @@
       </div>                                                                     <!-- fecha o card -->
     </section>       
     
+    <div class="section__divider"></div>
+
     <section class="Cards_funcionalidades">
       <div class="first_card_funcionalidades">
         <h1>SISTEMA NA PRÁTICA!</h1>
@@ -127,10 +130,10 @@ import Footer from '../components/Footer.vue';
 
 <style scoped>   
 * {
-  box-sizing: border-box;                                                        /* inclui padding e border na largura total */
-  margin: 0;                                                                      /* remove margens padrão */
-  padding: 0;                                                                     /* remove espaçamento interno padrão */
-}                                                                  /* CSS só vale neste componente */
+  box-sizing: border-box;                                                        
+  margin: 0;                                                                     
+  padding: 0;                                                                    
+}                                                                  
 
 /* estilo do <div class="home"> */
 .home {
@@ -335,6 +338,14 @@ import Footer from '../components/Footer.vue';
   background-color: #555;                                                            /* centraliza verticalmente */
   gap: 2rem;                                                                       /* espaço entre texto e imagem */
   margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
+}
+
+/* Linha divisória entre seções */
+.section__divider {
+  width: 80%;                                                                      /* ocupa 80% da largura */
+  height: 2px;                                                                     /* altura da linha */
+  background: linear-gradient(to right, transparent, #000000, transparent);       /* gradiente preto */
+  margin: 2rem auto;                                                               /* centraliza com margem */
 }
 
 /* Estilos para Cards de Funcionalidades */
