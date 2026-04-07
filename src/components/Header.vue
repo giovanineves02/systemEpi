@@ -14,7 +14,7 @@
         <h2>Sobre </h2>
       </div>
       <div class="contato">
-        <h2>contato</h2>
+        <h2>Contato</h2>
       </div>
 
       <div class="user-container">
