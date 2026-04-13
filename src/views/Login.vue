@@ -34,13 +34,23 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const email = ref('');
 const senha = ref('');
 
-
-
-
+const entrar = async () => {
+  // Validação básica
+  if (!email.value || !senha.value) {
+    alert('Por favor, preencha todos os campos');
+    return;
+  }
+  
+  // Aqui você pode adicionar a lógica de autenticação com Supabase
+  // Por enquanto, redireciona para o logintati
+  router.push('/logintati');
+};
 </script>
 
 <style scoped>

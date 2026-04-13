@@ -18,7 +18,7 @@
       </div>
 
       <div class="user-container">
-        <router-link to="/login" class="user-icon">
+        <router-link to="/Logintati" class="user-icon">
           <span class="icon-placeholder">Login</span>
         </router-link>
       </div>

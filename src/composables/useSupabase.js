@@ -54,3 +54,5 @@ export function useSupabase() {
   } 
 
 } 
+
+export { supabase } 

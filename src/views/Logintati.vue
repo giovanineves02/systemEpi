@@ -33,7 +33,7 @@ import { ref } from 'vue'
 // Importa o router para mudar de tela
 import { useRouter } from 'vue-router'
 // Importa o cliente do Supabase
-import { supabase } from '../composable/supabase'
+import { supabase } from '../composables/useSupabase'
 // Cria acesso ao router
 const router = useRouter()
 // Guarda o email digitado
