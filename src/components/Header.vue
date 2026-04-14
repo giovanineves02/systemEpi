@@ -18,11 +18,7 @@
       </div>
 
       <div class="user-container">
-<<<<<<< HEAD
         <router-link to="/login2" class="user-icon">
-=======
-        <router-link to="/Logintati" class="user-icon">
->>>>>>> e8f01bac7a13db57410011e7f936ab03787949ae
           <span class="icon-placeholder">Login</span>
         </router-link>
       </div>

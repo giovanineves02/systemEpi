@@ -26,7 +26,7 @@
     </header>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" :class="{ open: menuOpen }">
+    <aside class="sidebar" :class="{ open: menuOpen }"   @click.stop="toggleMenu">
       <p>Dashboard</p>
       <p>Relatórios</p>
       <p>Configurações</p>

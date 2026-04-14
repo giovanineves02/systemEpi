@@ -40,10 +40,7 @@
               {{ errorMessage }}
             </p>
 
-            <a href="#" class="link">Esqueceu sua senha?</a>
-            <router-link to="/initial" class="link">
-              Não tem uma conta?
-            </router-link>
+
 
           </form>
         </div>
@@ -63,14 +60,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-<<<<<<< HEAD:src/views/login2.vue
 import { supabase } from '../composables/useSupabase'
 
-=======
-// Importa o cliente do Supabase
-import { supabase } from '../composables/useSupabase'
-// Cria acesso ao router
->>>>>>> e8f01bac7a13db57410011e7f936ab03787949ae:src/views/Logintati.vue
 const router = useRouter()
 
 const email = ref('')
