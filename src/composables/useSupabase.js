@@ -10,15 +10,15 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
  
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey) 
+export const supabase = createClient(supabaseUrl, supabaseAnonKey) 
 
  
 
 // ⭐ estado global reativo 
 
-const session = ref(null) 
+export const session = ref(null)
 
-const loadingSession = ref(true) 
+export const loadingSession = ref(true)
 
  
 // pega sessão inicial 

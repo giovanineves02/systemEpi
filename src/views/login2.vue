@@ -1,99 +1,248 @@
 <template>
-<form @submit.prevent="handleLogin">
-<label for="email">E-mail</label>
-<input
-id="email"
-v-model="email"
-type="email"
-placeholder="seu@email.com"
-/>
-<label for="password">Senha</label>
-<input
-id="password"
-v-model="password"
-type="password"
-placeholder="Digite sua senha"
-/>
-<button :disabled="loading">
-{{ loading ? 'Carregando...' :
-'Entrar' }}
-</button>
-<p v-if="errorMessage">
-{{ errorMessage }}
-</p>
-<router-link to="/register">
-    Não tem conta? Cadastre-se
-</router-link>
-</form>
+  <section class="login-page">
+
+    <!-- FAIXA DE FUNDO -->
+    <div class="separacao"></div>
+
+    <!-- CARD -->
+    <div class="login-card">
+
+      <!-- CORTE DIAGONAL -->
+      <div class="separacao2"></div>
+
+      <div class="login-content">
+
+        <!-- ESQUERDA -->
+        <div class="login-left">
+          <h1>Faça seu Login</h1>
+
+          <form class="login-form" @submit.prevent="handleLogin">
+
+            <input
+              type="email"
+              v-model="email"
+              placeholder="Digite seu e-mail"
+              required
+            />
+
+            <input
+              type="password"
+              v-model="password"
+              placeholder="Digite sua senha"
+              required
+            />
+
+            <button :disabled="loading">
+              {{ loading ? 'Carregando...' : 'Login' }}
+            </button>
+
+            <p class="error" v-if="errorMessage">
+              {{ errorMessage }}
+            </p>
+
+            <a href="#" class="link">Esqueceu sua senha?</a>
+            <router-link to="/initial" class="link">
+              Não tem uma conta?
+            </router-link>
+
+          </form>
+        </div>
+
+        <!-- DIREITA (IMAGEM) -->
+        <div class="login-right">
+          <img src="../assets/logo_login.png" alt="Imagem EPI" />
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
 </template>
 
 <script setup>
-// Importa ref para criar variáveis reativas
 import { ref } from 'vue'
-// Importa o router para mudar de tela
 import { useRouter } from 'vue-router'
-// Importa o cliente do Supabase
-import { supabase } from '../composable/supabase'
-// Cria acesso ao router
+import { supabase } from '../composables/useSupabase'
+
 const router = useRouter()
-// Guarda o email digitado
+
 const email = ref('')
-// Guarda a senha digitada
 const password = ref('')
-// Controla o estado de carregamento do botão
 const loading = ref(false)
-// Guarda a mensagem de erro
 const errorMessage = ref('')
-// Função chamada quando o formulário for enviado
+
 const handleLogin = async () => {
-// Limpa a mensagem de erro antiga
-errorMessage.value = ''
-// Ativa o loading
-loading.value = true
-try {
-// Tenta fazer login no Supabase
-const { error } = await
-supabase.auth.signInWithPassword({
-email: email.value,
-password: password.value
-})
-// Se vier erro do Supabase, manda para o catch
-if (error) throw error
-// Se deu certo, vai para a tela
-principal
-router.push('/dashboard')
-} catch (error) {
-// Mostra erro para o usuário
-errorMessage.value = 'E-mail ou senha incorretos'
-} finally {
-// Desliga o loading sempre no final
-loading.value = false
-}
+  errorMessage.value = ''
+  loading.value = true
+
+  try {
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value
+    })
+
+    if (error) throw error
+
+    router.push('/initial')
+
+  } catch (error) {
+    errorMessage.value = 'E-mail ou senha incorretos'
+  } finally {
+    loading.value = false
+  }
 }
 </script>
+
 <style scoped>
-form{
-display:flex;
-flex-direction:column;
-gap:10px;
-max-width:320px;
-margin:auto;
+
+/* BASE */
+.login-page {
+  height: 100vh;
+  background: #FFFDF2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
 }
-label{
-font-weight:bold;
+
+/* FAIXA FUNDO */
+.separacao {
+  position: absolute;
+  width: 150%;
+  height: 200px;
+  background: black;
+  transform: rotate(-25deg);
+  top: 40%;
+  z-index: 1;
 }
-input,button{
-padding:10px;
-border-radius:8px;
-border:1px solid #ccc;
+
+/* CARD */
+.login-card {
+  width: 1000px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  padding: 40px;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
 }
-button{
-background:#667eea;
-color:#fff;
-border:none;
+
+/* CORTE DIAGONAL */
+.separacao2 {
+  position: absolute;
+  top: 0;
+  left: 45%;
+  width: 300px;
+  height: 120%;
+  background: white;
+
+  transform: skewX(-20deg);
+  transform-origin: top;
+
+  z-index: 20;
+
+  /* sombra suave (efeito premium) */
+  box-shadow: -10px 0 30px rgba(0,0,0,0.1);
 }
-a{
-color:#667eea;
-text-decoration:none;
+
+/* CONTEÚDO */
+.login-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
 }
+
+/* ESQUERDA */
+.login-left {
+  width: 45%;
+  z-index: 30;
+}
+
+.login-left h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-form input {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+}
+
+/* BOTÃO */
+.login-form button {
+  padding: 12px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-form button:hover {
+  background: #FFCC00;
+  color: black;
+}
+
+/* LINKS */
+.link {
+  font-size: 0.8rem;
+  color: #333;
+  text-decoration: none;
+}
+
+/* ERRO */
+.error {
+  color: red;
+  font-size: 0.85rem;
+}
+
+/* DIREITA */
+.login-right {
+  width: 50%;
+  z-index: 10;
+}
+
+.login-right img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+  .login-content {
+    flex-direction: column;
+  }
+
+  .login-left {
+    width: 100%;
+  }
+
+  .login-right {
+    width: 100%;
+  }
+
+  .separacao2 {
+    display: none; /* remove corte no mobile */
+  }
+
+  .login-card {
+    width: 90%;
+  }
+}
+
 </style>
