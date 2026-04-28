@@ -26,10 +26,10 @@
     </header>
 
     <!-- SIDEBAR -->
-    <aside class="sidebar" :class="{ open: menuOpen }"   @click.stop="toggleMenu">
-      <p>Dashboard</p>
-      <p>Relatórios</p>
-      <p>Configurações</p>
+    <aside class="sidebar" :class="{ open: menuOpen }" @click.stop="toggleMenu">
+      <router-link to="/" class="menu-link">Dashboard</router-link>
+      <router-link to="/initial" class="menu-link">Relatórios</router-link>
+      <router-link to="/cadastroFuncionario" class="menu-link">Cadastro Funcionário</router-link>
     </aside>
 
   </div>
@@ -37,6 +37,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
 const menuOpen = ref(false)
 
@@ -118,22 +119,39 @@ function toggleMenu() {
   position: fixed;
   top: 0;
   left: -250px;
-  width: 250px;
+  width: 260px;
   height: 100%;
-  background: #1a1a1a;
+  background: #111111;
   color: white;
-  padding: 20px;
-  transition: 0.3s;
+  padding: 24px;
+  transition: left 0.3s ease;
   z-index: 1000;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.35);
 }
 
 .sidebar.open {
   left: 0;
 }
 
+.menu-link {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.menu-link:hover,
+.menu-link.router-link-active {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(2px);
+}
+
 .sidebar p {
-  margin-bottom: 15px;
-  cursor: pointer;
+  display: none;
 }
 
 /* RESPONSIVO */

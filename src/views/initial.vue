@@ -9,8 +9,8 @@
 
       <!-- TÍTULO -->
       <div>
-        <h2 class="title">RELATÓRIOS</h2>
-        <div class="title-underline"></div>
+        <h2 class="title">Relatórios</h2>
+
       </div>
 
       <!-- CARDS -->
