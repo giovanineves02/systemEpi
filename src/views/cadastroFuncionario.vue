@@ -77,8 +77,8 @@
           <label>Status</label>
           <select v-model="statusFilter">
             <option value="all">Todos</option>
-            <option value="ativo">Ativos</option>
-            <option value="inativo">Inativos</option>
+            <option value="Ativo">Ativos</option>
+            <option value="Inativo">Inativos</option>
           </select>
         </div>
 
@@ -99,19 +99,19 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="employee in filteredEmployees" :key="employee.id">
-              <td>{{ employee.name }}</td>
-              <td>{{ employee.document }}</td>
-              <td>{{ employee.position }}</td>
-              <td>{{ getSectorName(employee.setor_id) }}</td>
-              <td>{{ employee.shift }}</td>
+            <tr v-for="employee in filteredEmployees" :key="employee.id_funcionario">
+              <td>{{ employee.nome }}</td>
+              <td>{{ employee.cpf }}</td>
+              <td>{{ employee.cargo }}</td>
+              <td>{{ getSectorName(employee.id_setor) }}</td>
+              <td>{{ employee.turno }}</td>
               <td>
-                <span :class="['status-chip', employee.status === 'ativo' ? 'active' : 'inactive']">
-                  {{ employee.status === 'ativo' ? 'Ativo' : 'Inativo' }}
-                </span>
+                  <span :class="['status-chip', employee.status ? 'active' : 'inactive']">
+                      {{ employee.status ? 'Ativo' : 'Inativo' }}
+                      </span>
               </td>
               <td class="employee-actions">
-                <button class="small-btn" @click="deleteEmployee(employee.id)">Remover</button>
+                <button class="small-btn" @click="deleteEmployee(employee.id_funcionario)">Remover</button>
               </td>
             </tr>
             <tr v-if="filteredEmployees.length === 0">
@@ -150,9 +150,12 @@ const employeeForm = reactive({
 
 const filteredEmployees = computed(() => {
   return employees.value.filter((employee) => {
-    const employeeName = employee.name || employee.nome || ''
+    const employeeName = employee.nome || ''
     const matchesName = employeeName.toLowerCase().includes(searchTerm.value.toLowerCase())
-    const matchesStatus = statusFilter.value === 'all' || employee.status === statusFilter.value
+    const matchesStatus =
+  statusFilter.value === 'all' ||
+  (statusFilter.value === 'Ativo' && employee.status === true) ||
+  (statusFilter.value === 'Inativo' && employee.status === false)
     return matchesName && matchesStatus
   })
 })
@@ -185,35 +188,31 @@ function getSectorName(sectorId) {
 
 async function loadSectors() {
   console.log('Loading sectors...')
-  // Try different possible table names
-  const possibleTableNames = ['setor', 'setores', 'sectors', 'department', 'departments']
-
-  for (const tableName of possibleTableNames) {
-    console.log(`Trying table: ${tableName}`)
-    const { data, error } = await supabase.from(tableName).select('*').limit(1)
-    if (!error) {
-      console.log(`Table ${tableName} exists. Structure:`, data)
-      // Found the table, now load all data
-      const { data: allData, error: allError } = await supabase.from(tableName).select('*').order('nome_setor')
-      if (!allError) {
-        console.log(`Loaded data from ${tableName}:`, allData)
-        sectors.value = allData || []
-        return
-      }
-    } else {
-      console.log(`Table ${tableName} error:`, error.message)
-    }
+  const { data, error } = await supabase.from('setor').select('*').order('nome_setor')
+  
+  if (error) {
+    console.error('Error loading sectors:', error)
+    message.value = 'Erro ao carregar setores.'
+    return
   }
-
-  message.value = 'Erro ao carregar setores. Nenhuma tabela de setores encontrada.'
+  
+  console.log('Sectors loaded:', data)
+  sectors.value = data || []
 }
 
 async function loadEmployees() {
   console.log('Loading employees...')
-  // The employees table needs to be created first
-  // For now, show a message
-  message.value = 'Tabela de funcionários não encontrada. Execute o SQL do arquivo supabase_tables.sql no Supabase para criar as tabelas.'
-  employees.value = []
+  const { data, error } = await supabase.from('funcionario').select('*').order('nome')
+  
+  if (error) {
+    console.error('Error loading employees:', error)
+    message.value = 'Erro ao carregar funcionários.'
+    employees.value = []
+    return
+  }
+  
+  console.log('Employees loaded:', data)
+  employees.value = data || []
 }
 
 async function saveEmployee() {
@@ -227,17 +226,17 @@ async function saveEmployee() {
 
   loading.value = true
   const payload = {
-    name: employeeForm.nome,
-    document: employeeForm.documento,
-    position: employeeForm.cargo,
-    setor_id: employeeForm.setorId,
-    shift: employeeForm.turno,
-    status: employeeForm.status
+    nome: employeeForm.nome,
+    cpf: employeeForm.documento,
+    cargo: employeeForm.cargo,
+    id_setor: employeeForm.setorId,
+    turno: employeeForm.turno,
+    status: employeeForm.status === 'ativo'
   }
 
   console.log('Saving employee with data:', payload)
 
-  const { error } = await supabase.from('employees').insert([payload])
+  const { error } = await supabase.from('funcionario').insert([payload])
   loading.value = false
 
   if (error) {
@@ -258,7 +257,7 @@ async function deleteEmployee(id) {
 
   console.log('Deleting employee with id:', id)
 
-  const { error } = await supabase.from('employees').delete().eq('id', id)
+  const { error } = await supabase.from('funcionario').delete().eq('id_funcionario', id)
   if (error) {
     message.value = 'Erro ao remover funcionário.'
     console.error('Error deleting employee:', error)
