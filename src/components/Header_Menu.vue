@@ -23,6 +23,20 @@
         <h2 class="logo-text">SAFETY STOCK EPI</h2>
       </div>
 
+      <!-- USER MENU -->
+      <div class="user-menu" v-if="session">
+        <button @click="toggleUserMenu" class="user-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.59 22C20.59 18.13 16.74 15 12 15C7.26 15 3.41 18.13 3.41 22" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div v-if="userMenuOpen" class="user-dropdown">
+          <p>{{ session.user.email }}</p>
+          <button @click="logout" class="logout-btn">Sair</button>
+        </div>
+      </div>
+
     </header>
 
     <!-- SIDEBAR -->
@@ -30,6 +44,7 @@
       <router-link to="/" class="menu-link">Dashboard</router-link>
       <router-link to="/initial" class="menu-link">Relatórios</router-link>
       <router-link to="/cadastroFuncionario" class="menu-link">Cadastro Funcionário</router-link>
+      <router-link to="/cadastroEpi" class="menu-link">Cadastro EPI</router-link>
     </aside>
 
   </div>
@@ -37,12 +52,27 @@
 
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import { useSupabase } from '../composables/useSupabase.js'
+
+const { session, supabase } = useSupabase()
+const router = useRouter()
 
 const menuOpen = ref(false)
+const userMenuOpen = ref(false)
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value
+}
+
+function toggleUserMenu() {
+  userMenuOpen.value = !userMenuOpen.value
+}
+
+async function logout() {
+  await supabase.auth.signOut()
+  userMenuOpen.value = false
+  router.push('/login2')
 }
 </script>
 
@@ -59,10 +89,11 @@ function toggleMenu() {
 .header {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   background: #FFCC00;
   padding: 0 20px;
   height: 70px;
+  justify-content: space-between;
 }
 
 /* LOGO */
@@ -70,6 +101,7 @@ function toggleMenu() {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-right: auto;
 }
 
 .logo-icon img {
@@ -79,6 +111,48 @@ function toggleMenu() {
 .logo-text {
   font-weight: bold;
   font-size: 18px;
+}
+
+/* USER MENU */
+.user-menu {
+  position: relative;
+}
+
+.user-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.user-dropdown p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #c82333;
 }
 
 /* HAMBURGER */

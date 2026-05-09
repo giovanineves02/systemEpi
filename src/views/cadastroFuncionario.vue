@@ -316,8 +316,6 @@ onMounted(async () => {
   margin-bottom: 5px;
 }
 
-
-
 /* BOTÕES */
 .actions {
   display: flex;
