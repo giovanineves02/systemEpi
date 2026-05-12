@@ -44,6 +44,11 @@
           </div>
 
           <div class="filter-group">
+            <label>Quantidade</label>
+            <input v-model.number="epiForm.quantidade" type="number" min="1" placeholder="Quantidade" />
+          </div>
+
+          <div class="filter-group">
             <label>Fabricante</label>
             <input v-model="epiForm.fabricante" placeholder="Nome do fabricante" />
           </div>
@@ -88,6 +93,7 @@
             <tr>
               <th>Nome</th>
               <th>Categoria</th>
+              <th>Quantidade</th>
               <th>Número CA</th>
               <th>Fabricante</th>
               <th>Data de Validade</th>
@@ -98,6 +104,7 @@
             <tr v-for="epi in filteredEpis" :key="epi.id">
               <td>{{ epi.nome }}</td>
               <td>{{ epi.categoria }}</td>
+              <td>{{ epi.quantidade }}</td>
               <td>{{ epi.numero_ca }}</td>
               <td>{{ epi.fabricante }}</td>
               <td>{{ formatDate(epi.dt_validade) }}</td>
@@ -131,6 +138,7 @@ const epiForm = reactive({
   nome: '',
   categoria: '',
   numero_ca: '',
+  quantidade: 1,
   fabricante: '',
   dt_validade: ''
 })
@@ -148,6 +156,7 @@ function resetForm() {
   epiForm.nome = ''
   epiForm.categoria = ''
   epiForm.numero_ca = ''
+  epiForm.quantidade = 1
   epiForm.fabricante = ''
   epiForm.dt_validade = ''
 }
@@ -188,8 +197,8 @@ async function loadEpis() {
 async function saveEpi() {
   console.log('Form values:', epiForm)
 
-  if (!epiForm.nome || !epiForm.categoria || !epiForm.numero_ca || !epiForm.fabricante || !epiForm.dt_validade) {
-    message.value = 'Preencha todos os campos obrigatórios.'
+  if (!epiForm.nome || !epiForm.categoria || !epiForm.numero_ca || !epiForm.quantidade || epiForm.quantidade <= 0 || !epiForm.fabricante || !epiForm.dt_validade) {
+    message.value = 'Preencha todos os campos obrigatórios corretamente.'
     return
   }
 
@@ -198,6 +207,7 @@ async function saveEpi() {
     nome: epiForm.nome,
     categoria: epiForm.categoria,
     numero_ca: epiForm.numero_ca,
+    quantidade: epiForm.quantidade,
     fabricante: epiForm.fabricante,
     dt_validade: epiForm.dt_validade
   }

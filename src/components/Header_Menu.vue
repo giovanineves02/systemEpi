@@ -41,10 +41,10 @@
 
     <!-- SIDEBAR -->
     <aside class="sidebar" :class="{ open: menuOpen }" @click.stop="toggleMenu">
-      <router-link to="/" class="menu-link">Dashboard</router-link>
       <router-link to="/initial" class="menu-link">Relatórios</router-link>
       <router-link to="/cadastroFuncionario" class="menu-link">Cadastro Funcionário</router-link>
       <router-link to="/cadastroEpi" class="menu-link">Cadastro EPI</router-link>
+      <router-link to="/cadastroEntrega" class="menu-link">Cadastro Entrega</router-link>
     </aside>
 
   </div>
