@@ -1,578 +1,257 @@
-<template>                                                                         <!-- bloco obrigatório que envolve o HTML do componente Vue -->
-<Header />            
-  <div class="home">                                                               <!-- div principal que centraliza o conteúdo -->
-
-    <!-- ========== HERO ========== -->
-
-    <section class="home__menu">                                                   <!-- seção com título, texto e imagem -->
-
-      <div class="home__menu-texto">                                                                                     <!-- lado esquerdo: título principal da página -->
-        <h1>Sistema de Controle de EPIs<br> para Instituições de Ensino</h1> 
-        <p>Gerencie entregas, validade e rastreabilidade de <br>equipamentos de proteção individual de forma <br> simples e eficiente</p>   <!-- texto de apresentação -->
-        <router-link to="/login" class="start_now">
-           <button class="button_Comece_agora">Comece agora</button>
-        </router-link>
-      </div>                                                               <!-- fecha o bloco de texto -->
-
-      <div class="home__hero-imagem">                                             <!-- lado direito: imagem ilustrativa -->
-        <img                                                                       
-          src="../assets/landing.png"                                               
-          alt="Ilustração de gestão de EPI"                                        
-          class="home__hero-img"                                                   
-        />                                                                         <!-- tag img não tem fechamento -->
-      </div>                                                                       <!-- fecha o bloco de imagem -->
-
-    </section>                                                                     <!-- fecha a seção hero -->
-
-    <div class="section__divider"></div>
-
-    <section class="home__cards">                                                  <!-- seção com os 4 cards de números -->
-
-      <div class="card">                                                           <!-- card: plano inicial -->
-                    
-        <span class="card__numero1">Inicial</span>                                     <!-- plano em destaque -->
-        <div class="card__preco">
-          <span class="card__valor1">R$50</span>
-          <span class="card__valor4">/mês</span>
-        </div>
-       <span class="card__label1">- Lançamento de EPI</span>
-        <span class="card__label2">- Notificação de vencimento</span>
-        <span class="card__label3">- Lançamento de fornecedores</span> 
-         <button class="button_solicitar_orcamento1">Comece agora</button>                                          <!-- preço do plano -->
-      </div>                                                                       <!-- fecha o card -->
-
-      <div class="card2">                                                           <!-- card: plano inicial -->
-                    
-        <span class="card__numero2">Intermediário</span>                                     <!-- plano em destaque -->
-        <div class="card__preco">
-          <span class="card__valor1">R$150</span>
-          <span class="card__valor4">/mês</span>
-        </div>
-       <span class="card__label1">- Lançamento de EPI</span>
-        <span class="card__label2">- Notificação de vencimento</span>
-        <span class="card__label3">- Lançamento de fornecedores</span>    
-        <span class="card__label3">- API de Integração</span>    
-        <button class="button_solicitar_orcamento2">Comece agora</button>                                 
-      </div>                                                                          <!-- fecha o card -->
-
-      <div class="card3">                                                           <!-- card: plano inicial -->
-                    
-        <span class="card__numero3">Avançado</span>                                     <!-- plano em destaque -->
-        <div class="card__preco">
-          <span class="card__valor1">R$300</span>
-          <span class="card__valor4">/mês</span>
-        </div>
-       <span class="card__label1">- Lançamento de EPI</span>
-        <span class="card__label2">- Notificação de vencimento</span>
-        <span class="card__label3">- Lançamento de fornecedores</span>    
-        <span class="card__label3">- API de Integração</span>       
-        <span class="card__label3">- 16h Treinamento Próprio</span>   
-        <button class="button_solicitar_orcamento3">Comece agora</button>                                  
-      </div>                                                                     <!-- fecha o card -->
-    </section>       
-    
-    <div class="section__divider"></div>
-
-    <section class="Cards_funcionalidades">
-      <div class="first_card_funcionalidades">
-        <h1>SISTEMA NA PRÁTICA!</h1>
-      </div>
-
-      <div class="funcionalidades_grid">
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">📦</div>
-          <h3>Controle de Estoque</h3>
-          <p>Gerenciamento completo de EPIs com rastreamento de entrada, saída e disponibilidade em tempo real</p>
+<template>
+  <Header />
+  <div class="home">
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <h1 class="hero__title">
+            Sistema de Controle de EPIs<br />
+            <span class="hero__subtitle">para Instituições de Ensino</span>
+          </h1>
+          <p class="hero__description">
+            Gerencie entregas, validade e rastreabilidade de equipamentos de proteção 
+            individual de forma simples, eficiente e segura.
+          </p>
+          <router-link to="/login">
+            <button class="btn-main-cta">Comece agora</button>
+          </router-link>
         </div>
 
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">⏰</div>
-          <h3>Notificação de Vencimento</h3>
-          <p>Alertas automáticos para EPIs próximos do vencimento, garantindo segurança e conformidade</p>
-        </div>
-
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">👥</div>
-          <h3>Gestão de Usuários</h3>
-          <p>Controle de permissões e perfis de acesso para diferentes tipos de usuários do sistema</p>
-        </div>
-
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">📊</div>
-          <h3>Relatórios e Análises</h3>
-          <p>Gráficos e relatórios detalhados sobre uso, consumo e padrões de EPIs na instituição</p>
-        </div>
-
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">🏢</div>
-          <h3>Gestão de Fornecedores</h3>
-          <p>Cadastro e rastreamento de fornecedores, histórico de compras e avaliação de performance</p>
-        </div>
-
-        <div class="card_funcionalidade">
-          <div class="icon_funcionalidade">📱</div>
-          <h3>API de Integração</h3>
-          <p>Integração com seus sistemas existentes através de API robusta e documentada</p>
+        <div class="hero__image-wrapper">
+          <img src="../assets/landing.png" alt="Gestão de EPI" class="hero__img" />
         </div>
       </div>
     </section>
-                                                               
 
-  </div>                                                                           <!-- fecha a div principal -->
-<Footer />
-</template>          
+    <div class="section__divider"></div>
+
+    <!-- ========== PRICING SECTION ========== -->
+    <section class="pricing">
+      <div class="section-header">
+        <h2 class="section__title">Nossos Planos</h2>
+      </div>
+      <div class="pricing__grid">
+        
+        <!-- Card Inicial -->
+        <div class="price-card">
+          <div class="card-header">
+            <h3>Inicial</h3>
+            <div class="price-box">
+              <span class="currency">R$</span>
+              <span class="amount">50</span>
+              <span class="period">/mês</span>
+            </div>
+          </div>
+          <ul class="card-features">
+            <li>Lançamento de EPI</li>
+            <li>Notificação de vencimento</li>
+            <li>Lançamento de fornecedores</li>
+          </ul>
+          <button class="btn-plan-yellow">Assinar Agora</button>
+        </div>
+
+        <!-- Card Intermediário (Destaque Dark) -->
+        <div class="price-card featured-dark">
+          <div class="card-header">
+            <h3>Intermediário</h3>
+            <div class="price-box">
+              <span class="currency">R$</span>
+              <span class="amount">150</span>
+              <span class="period">/mês</span>
+            </div>
+          </div>
+          <ul class="card-features">
+            <li>Lançamento de EPI</li>
+            <li>Notificação de vencimento</li>
+            <li>Lançamento de fornecedores</li>
+            <li>API de Integração</li>
+          </ul>
+          <button class="btn-plan-white">Assinar Agora</button>
+        </div>
+
+        <!-- Card Avançado -->
+        <div class="price-card">
+          <div class="card-header">
+            <h3>Avançado</h3>
+            <div class="price-box">
+              <span class="currency">R$</span>
+              <span class="amount">300</span>
+              <span class="period">/mês</span>
+            </div>
+          </div>
+          <ul class="card-features">
+            <li>Lançamento de EPI</li>
+            <li>Notificação de vencimento</li>
+            <li>API de Integração</li>
+            <li>16h Treinamento Próprio</li>
+          </ul>
+          <button class="btn-plan-yellow">Assinar Agora</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="section__divider"></div>
+
+    <!-- ========== FEATURES SECTION (SISTEMA NA PRÁTICA) ========== -->
+    <section class="features-section">
+      <div class="features-container">
+        <div class="features-header">
+          <span class="badge">Funcionalidades</span>
+          <h2 class="section__title">Sistema na Prática</h2>
+          <div class="title-underline"></div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feat-card" v-for="(f, i) in features" :key="i">
+            <div class="feat-icon-wrapper">
+              <span class="feat-icon">{{ f.icon }}</span>
+            </div>
+            <div class="feat-content">
+              <h4>{{ f.title }}</h4>
+              <p>{{ f.desc }}</p>
+            </div>
+            <div class="card-glow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <Footer />
+</template>
 
 <script setup>
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+
+const features = [
+  { icon: '📦', title: 'Controle de Estoque', desc: 'Rastreamento inteligente de entrada, saída e níveis críticos em tempo real.' },
+  { icon: '⏰', title: 'Alertas Ativos', desc: 'Sistema de notificações automáticas para renovação de CAs e validades.' },
+  { icon: '👥', title: 'Gestão de Usuários', desc: 'Controle granular de permissões por departamento ou cargo acadêmico.' },
+  { icon: '📊', title: 'Business Intelligence', desc: 'Dashboards completos com métricas de consumo e custo por setor.' },
+  { icon: '🏢', title: 'Fornecedores', desc: 'Portal para cotações e histórico de performance de entrega de cada parceiro.' },
+  { icon: '📱', title: 'Conectividade API', desc: 'Integre o controle de EPIs ao seu ERP ou sistema acadêmico nativo.' }
+];
 </script>
 
-
-<style scoped>   
-* {
-  box-sizing: border-box;                                                        
-  margin: 0;                                                                     
-  padding: 0;                                                                    
-}                                                                  
-
-/* estilo do <div class="home"> */
+<style scoped>
+/* --- Configurações Gerais --- */
 .home {
-  max-width: auto;
-  margin: auto;
-  padding: var(--spacing-2xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   background-color: var(--background-light);
+  overflow-x: hidden;
 }
 
-/* estilo do <section class="home__hero"> */
-.home__hero {
-  display: flex;                                                                   /* texto e imagem lado a lado */
-  align-items: center;                                                             /* centraliza verticalmente */
-  gap: 2rem;                                                                       /* espaço entre texto e imagem */
-  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-}
-
-.home__menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0;
-  margin-bottom: var(--spacing-3xl);
-  margin-left: calc(-50vw + 50%);
-  position: relative;
-  background-color: var(--background-light);
-}
-
-.home__hero-texto { flex: 1; }                                                    /* ocupa metade do espaço */
-.home__hero-imagem { 
-  width: 80%;
-  display: flex;
-  justify-content: center;
-}
-
-/* estilo do <h1> dentro de .home__menu-texto */
-.home__menu-texto h1 {
-  font-size: 3rem;
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-2xl);
-}
-
-/* estilo do <p> dentro de .home__menu-texto */
-.home__menu-texto p {
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 2em;
-}
-
-/* estilo do <img class="home__hero-img"> */
-.home__hero-img {
-  width: 100%;
-  height: auto;
-  border-radius: 5rem;     
-}
-
-/* estilo do <section class="home__cards"> */
-.home__cards {
-  display: grid;                                                                   /* organiza os cards em grade */
-  grid-template-columns: repeat(3, 1fr);                                           /* cria 3 colunas de tamanho igual */
-  gap: 5rem;                                                                     /* espaço entre os cards */
-  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-  margin-left: auto;                                                               /* margem esquerda automática */
-  margin-right: auto;                                                              /* margem direita automática */
-}
-
-/* estilo do <div class="card"> */
-.card, .card3 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-2xl);
-  background: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  min-height: 500px;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card3:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.card2:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.card2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--spacing-2xl);
-  background: var(--text-primary);
-  border: 1px solid white;
-  border-radius: var(--radius-lg);
-  min-height: 500px;
-  justify-content: space-between;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* estilo do <div class="card card--alerta"> */
-.card--alerta {
-  border-color: #F97316;                                                           /* troca a borda para laranja */
-  background: #FFF7ED;                                                             /* fundo laranja bem claro */
-}
-
-/* estilo do <span class="card__icone"> */
-.card__icone {
-  font-size: 32px;                                                                 /* tamanho do emoji/ícone */
-  margin-bottom: 8px;                                                              /* espaço abaixo do ícone */
-}
-
-/* estilo do <span class="card__numero"> */
-.card__numero1, .card__numero2, .card__numero3 {
-  font-size: 2rem;
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-}
-
-/* estilo do <span class="card__label"> */
-.card__label {
-  font-size: 2rem;
-  color: var(--text-primary);
-  margin-top: var(--spacing-xl);
-  line-height: 1.8;
-}
-
-/* estilo do <section class="home__instrucoes"> */
-.home__instrucoes {
-  margin-bottom: 4rem;                                                             /* espaço abaixo da seção */
-}
-
-/* estilo do <h2 class="home__instrucoes-titulo"> */
-.home__instrucoes-titulo {
-  font-size: 22px;                                                                 /* tamanho do título da seção */
-  color: #1E3A5F;                                                                  /* azul escuro */
-  margin-bottom: 1.5rem;                                                           /* espaço abaixo do título */
-  text-align: center;                                                              /* centraliza o texto */
-}
-
-/* estilo do <div class="home__passos"> */
-.home__passos {
-  display: grid;                                                                   /* organiza os passos em grade */
-  grid-template-columns: repeat(4, 1fr);                                           /* 4 colunas de tamanho igual */
-  gap: 1.5rem;                                                                     /* espaço entre os passos */
-}
-
-/* estilo do <div class="passo"> */
-.passo {
-  padding: 1.5rem;                                                                 /* espaço interno */
-  background: #F8FAFC;                                                             /* fundo cinza claro */
-  border-radius: 12px;                                                             /* cantos arredondados */
-  border-left: 4px solid #F97316;                                                  /* barra laranja à esquerda */
-  border-radius: 0 12px 12px 0;                                                    /* arredonda só os cantos da direita */
-}
-
-/* estilo do <span class="passo__numero"> */
-.passo__numero {
-  display: inline-block;                                                           /* permite definir largura e altura */
-  width: 28px;                                                                     /* largura do círculo */
-  height: 28px;                                                                    /* altura do círculo */
-  border-radius: 50%;                                                              /* transforma em círculo */
-  background: #F97316;                                                             /* fundo laranja */
-  color: #fff;                                                                     /* número branco */
-  text-align: center;                                                              /* centraliza o número */
-  line-height: 28px;                                                               /* alinha o número verticalmente */
-  font-weight: 700;                                                                /* número em negrito */
-  font-size: 14px;                                                                 /* tamanho do número */
-  margin-bottom: 10px;                                                             /* espaço abaixo do círculo */
-}
-
-/* estilo do <h3> dentro de .passo */
-.passo h3 {
-  font-size: 15px;                                                                 /* tamanho do título do passo */
-  color: #1E3A5F;                                                                  /* azul escuro */
-  margin: 0 0 6px;                                                                 /* espaço abaixo do título */
-}
-
-/* estilo do <p> dentro de .passo */
-.passo p {
-  font-size: 13px;                                                                 /* tamanho do texto */
-  color: #555;                                                                     /* cinza médio */
-  line-height: 1.6;                                                                /* espaço entre as linhas */
-  margin: 0;                                                                       /* remove margem padrão */
-}
-
-.home_menu_info-texto {
-  display: flex;                                                                   /* texto e imagem lado a lado */
-  align-items: center;                                                             /* centraliza verticalmente */
-  justify-content: center;                                                         /* centraliza horizontalmente */
-  background-color: #555;                                                            /* centraliza verticalmente */
-  gap: 2rem;                                                                       /* espaço entre texto e imagem */
-  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-}
-
-/* Linha divisória entre seções */
 .section__divider {
-  width: 80%;
-  height: 2px;
-  background: linear-gradient(to right, transparent, var(--text-primary), transparent);
-  margin: var(--spacing-2xl) auto;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-color), transparent);
+  margin: 60px 0;
 }
 
-/* Estilos para Cards de Funcionalidades */
-.Cards_funcionalidades {
+.section__title {
+  font-size: 2.8rem;
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-weight: 800;
+}
+
+/* --- Hero --- */
+.hero { padding: 80px 0; }
+.hero__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+.hero__content { flex: 1; }
+.hero__title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+.hero__subtitle { font-size: 1.8rem; color: #666; display: block; margin-top: 10px; }
+.hero__description { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 40px; }
+.btn-main-cta {
+  background-color: var(--primary);
+  border: none;
+  padding: 18px 40px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-main-cta:hover { background-color: var(--primary-dark); transform: translateY(-3px); }
+.hero__img { width: 100%; max-width: 550px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+
+/* --- Pricing Cards --- */
+.pricing__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  padding: 20px 0;
+}
+.price-card {
+  background: white;
+  padding: 45px 35px;
+  border-radius: 24px;
+  border: 1px solid #eee;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-3xl);
-  margin-bottom: var(--spacing-3xl);
-  margin-top: var(--spacing-3xl);
+  transition: 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
+.price-card:hover { transform: translateY(-10px); }
+.featured-dark { background: #1a1a1a; color: white; transform: scale(1.05); border: none; }
+.featured-dark .price-box .amount { color: var(--primary); }
+.price-box { margin: 30px 0; }
+.amount { font-size: 3.5rem; font-weight: 800; }
+.currency { font-size: 1.2rem; vertical-align: top; margin-right: 4px; }
+.card-features { list-style: none; padding: 0; margin-bottom: 35px; flex-grow: 1; }
+.card-features li { margin-bottom: 15px; font-size: 1.1rem; opacity: 0.9; }
+.btn-plan-yellow { background: var(--primary); border: none; padding: 15px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; }
+.btn-plan-white { background: white; color: #1a1a1a; border: none; padding: 15px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; }
 
-.first_card_funcionalidades {
-  width: 100%;
-  text-align: center;
-}
-
-.first_card_funcionalidades h1 {
-  font-size: 2.5rem;
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-xl);
-}
-
-.funcionalidades_grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-2xl);
-  width: 100%;
-}
-
-.card_funcionalidade {
+/* --- Features (Sistema na Prática) --- */
+.features-section { padding: 80px 0; }
+.features-header { text-align: center; margin-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
+.badge { background: var(--primary); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
+.title-underline { width: 60px; height: 5px; background: var(--primary); border-radius: 10px; margin-top: 10px; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+.feat-card {
+  position: relative;
   background: white;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-2xl);
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 40px;
+  border-radius: 28px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
 }
-
-.card_funcionalidade:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.icon_funcionalidade {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-xl);
-}
-
-.card_funcionalidade h3 {
-  font-size: 1.5rem;
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-xl);
-}
-
-.card_funcionalidade p {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
-
-.home__menu-texto {
-  margin-left: 10rem;
-  font-size: 1.75rem;
-  width: 100%;
-}
-
-.button_Comece_agora {
-  background-color: var(--primary);
-  width: 10rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
+.feat-card:hover { transform: translateY(-12px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(255, 204, 0, 0.15); }
+.feat-icon-wrapper {
+  width: 65px;
+  height: 65px;
+  background: #fffdf2;
+  border-radius: 18px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--text-primary);
-  border: none;
-  transition: background 0.2s;
-}
-
-.button_Comece_agora:hover {
-  background-color: var(--primary-dark);
-}                  
-
-
-
-.card__label1 {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  margin-top: var(--spacing-xl);
-}
-
-.card__label2 {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  margin-top: var(--spacing-md);
-}
-
-.card__label3 {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  margin-top: var(--spacing-md);
-}
-
-.card2 .card__numero2,
-.card2 .card__valor1,
-.card2 .card__valor4,
-.card2 .card__label1,
-.card2 .card__label2,
-.card2 .card__label3 {
-  color: white;
-  font-size: 1.25rem;
-}
-
-.card .card__valor1 {
-  color: var(--text-primary);
+  justify-content: center;
   font-size: 2rem;
-  font-weight: var(--font-weight-bold);
+  margin-bottom: 25px;
+  transition: 0.3s;
+  border: 1px solid #fff2cc;
 }
+.feat-card:hover .feat-icon-wrapper { background: var(--primary); transform: rotate(-8deg) scale(1.1); }
+.feat-content h4 { font-size: 1.4rem; margin-bottom: 15px; font-weight: 700; color: #1a1a1a; }
+.feat-content p { color: #666; line-height: 1.6; }
+.card-glow { position: absolute; bottom: -20px; right: -20px; width: 80px; height: 80px; background: var(--primary); filter: blur(40px); opacity: 0; transition: 0.4s; }
+.feat-card:hover .card-glow { opacity: 0.3; }
 
-.card3 .card__valor1 {
-  color: var(--text-primary);
-  font-size: 2rem;
-  font-weight: var(--font-weight-bold);
+/* --- Mobile --- */
+@media (max-width: 992px) {
+  .hero__container { flex-direction: column; text-align: center; }
+  .hero__img { max-width: 100%; }
+  .featured-dark { transform: scale(1); }
 }
-
-.card__preco {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--spacing-sm);
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.button_solicitar_orcamento1, .button_solicitar_orcamento3 {
-  background-color: var(--primary);
-  width: 10rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--text-primary);
-  border: none;
-  transition: background 0.2s;
-  margin-top: var(--spacing-2xl);
-}
-
-.button_solicitar_orcamento1:hover,
-.button_solicitar_orcamento3:hover {
-  background-color: var(--primary-dark);
-}
-
-.button_solicitar_orcamento2 {
-  background-color: white;
-  width: 10rem;
-  height: 3rem;
-  border-radius: var(--radius-md);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  text-decoration: none;
-  color: var(--text-primary);
-  border: 1px solid var(--text-primary);
-  transition: background 0.2s;
-  margin-top: var(--spacing-xl);
-}
-
-.button_solicitar_orcamento2:hover {
-  background-color: var(--background);
-}
-
-/* Media queries para responsividade */
-@media (max-width: 768px) {
-  .home__menu {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .home__menu-texto {
-    margin-left: 0;
-    text-align: center;
-  }
-
-  .home__hero-imagem {
-    width: 80%;
-  }
-
-  .home__cards {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .Cards_funcionalidades {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .funcionalidades_grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .first_card_funcionalidades h1 {
-    font-size: 1.75rem;
-  }
-
-}
-
-</style>                                                                           
+</style>
