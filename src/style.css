@@ -1,5 +1,49 @@
+:root {
+  /* CORES */
+  --primary: #FDD017;
+  --primary-dark: #E6BF0F;
+  --background: #f5f5f5;
+  --background-light: #f9f9f9;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-light: #999999;
+  --border-color: #dddddd;
+  --success: #22c55e;
+  --success-light: #d4edda;
+  --error: #ef4444;
+  --error-light: #f8d7da;
+  --info: #3b82f6;
+  
+  /* TIPOGRAFIA */
+  --font-family-body: 'Barlow', sans-serif;
+  --font-family-heading: 'Bebas Neue', sans-serif;
+  --font-size-h1: 48px;
+  --font-size-h2: 28px;
+  --font-size-label: 14px;
+  --font-size-body: 14px;
+  --font-size-sm: 12px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  
+  /* ESPAÇAMENTO */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+  
+  /* BORDER RADIUS */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
 * {
-  box-sizing: border-box;                                                        /* inclui padding e border na largura total */
-  margin: 0;                                                                      /* remove margens padrão */
-  padding: 0;                                                                     /* remove espaçamento interno padrão */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-body);
 }

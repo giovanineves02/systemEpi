@@ -1,234 +1,297 @@
 <template>
-  <div class="app">
+  <Header_Menu />
+  <div class="page-container">
+    <section class="top-bar">
+      <h1 class="title">Indicadores</h1>
+    </section>
 
-    <!-- HEADER -->
-<Header_Menu />  
-
-    <!-- CONTEÚDO -->
-    <main class="container">
-
-      <!-- TÍTULO -->
-      <div>
-        <h2 class="title">Relatórios</h2>
-
-      </div>
-
-      <!-- CARDS -->
-      <div class="cards">
-
-        <div class="card yellow">
-          <p>Inventário</p>
-          <h2>R$ {{ formatCurrency(metrics.totalInventory) }}</h2>
-          <small>Total em Inventário</small>
-
-          <div class="divider"></div>
-
-          <h3>{{ metrics.totalItems }}</h3>
-          <small>TOTAL de Itens</small>
+    <main class="content">
+      <div class="cards-grid">
+        <div class="metrics-card card-yellow">
+          <div class="card-icon"></div>
+          <div class="card-info">
+            <p>Inventário Total</p>
+            <h2>{{ metrics.totalItems }}</h2>
+            <small>EPIs Cadastrados</small>
+          </div>
         </div>
 
-        <div class="card green">
-          <p>Descarte</p>
-          <h2>R$ {{ formatCurrency(metrics.totalDiscount) }}</h2>
-          <small>Desconto no Período</small>
-
-          <div class="divider"></div>
-
-          <h3>{{ metrics.discarded }}</h3>
-          <small>Descartados</small>
+        <div class="metrics-card card-red">
+          <div class="card-icon"></div>
+          <div class="card-info">
+            <p>Vencidos / Críticos</p>
+            <h2>{{ metrics.expiredEPIs }}</h2>
+            <small>Atenção necessária</small>
+          </div>
         </div>
 
-        <div class="card alert">
-          <p>ATENÇÃO</p>
-          <h2>{{ metrics.expiredEPIs }}</h2>
-          <small>EPIs Vencidos</small>
+        <div class="metrics-card card-green">
+          <div class="card-icon"></div>
+          <div class="card-info">
+            <p>Entregas Realizadas</p>
+            <h2>{{ metrics.totalDeliveries }}</h2>
+            <small>No período selecionado</small>
+          </div>
+        </div>
+      </div>
 
-          <div class="divider"></div>
-
-          <h3>{{ metrics.toExpire }}</h3>
-          <small>A Vencer</small>
+      <div class="filters-bar">
+        <div class="filter-group">
+          <label>Buscar EPI</label>
+          <input v-model="searchTerm" placeholder="Nome ou CA..." />
         </div>
 
+        <div class="filter-group">
+          <label>Data Início</label>
+          <input type="date" v-model="dateStart" @change="loadData" />
+        </div>
+
+        <div class="filter-group">
+          <label>Data Fim</label>
+          <input type="date" v-model="dateEnd" @change="loadData" />
+        </div>
+
+        <button class="primary-btn" @click="loadData">Atualizar</button>
       </div>
 
-      <!-- FILTROS -->
-      <div class="filters">
-        <input v-model="searchTerm" placeholder="Filtrar..." />
-
-        <select v-model="dateFilter">
-          <option value="all">Todos</option>
-          <option value="month">Mês</option>
-          <option value="year">Ano</option>
-        </select>
-      </div>
-
-      <!-- TABELA -->
       <div class="table-container">
         <table>
           <thead>
             <tr>
-              <th>Nome</th>
-              <th>CA</th>
+              <th>Nome do EPI</th>
+              <th>Número CA</th>
+              <th>Fabricante</th>
               <th>Vencimento</th>
-              <th>Qtd</th>
+              <th>Qtd em Estoque</th>
               <th>Status</th>
             </tr>
           </thead>
-
           <tbody>
-            <tr v-for="item in filteredData" :key="item.id">
-              <td>{{ item.name }}</td>
-              <td>{{ item.ca }}</td>
-              <td>{{ item.expiration }}</td>
-              <td>{{ item.quantity }}</td>
+            <tr v-for="epi in filteredData" :key="epi.id">
+              <td><strong>{{ epi.nome }}</strong></td>
+              <td>{{ epi.numero_ca }}</td>
+              <td>{{ epi.fabricante }}</td>
+              <td>{{ formatDate(epi.dt_validade) }}</td>
+              <td>{{ epi.quantidade }}</td>
               <td>
-                <span :class="['status', item.status]">
-                  {{ getStatusText(item.status) }}
+                <span :class="['status-chip', getStatusClass(epi.dt_validade)]">
+                  {{ getStatusText(epi.dt_validade) }}
                 </span>
               </td>
             </tr>
+            <tr v-if="filteredData.length === 0">
+              <td colspan="6" class="empty-state">Nenhum registro encontrado para este filtro.</td>
+            </tr>
           </tbody>
         </table>
-
         <div class="table-footer">
-          Mostrando {{ filteredData.length }} registros
+          Mostrando {{ filteredData.length }} registros de EPIs no sistema.
         </div>
       </div>
-
     </main>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { supabase } from '../composables/useSupabase'
 import Header_Menu from '../components/Header_Menu.vue'
 
-const menuOpen = ref(false)
-const dateFilter = ref('all')
 const searchTerm = ref('')
+const dateStart = ref('')
+const dateEnd = ref('')
+const epis = ref([])
+const metrics = ref({
+  totalItems: 0,
+  expiredEPIs: 0,
+  totalDeliveries: 0
+})
 
-const metrics = {
-  totalInventory: 151598.26,
-  totalDiscount: 51115.23,
-  totalItems: 1000,
-  discarded: 25,
-  expiredEPIs: 112,
-  toExpire: 25
+// Lógica de Filtro
+const filteredData = computed(() => {
+  return epis.value.filter(item => {
+    const nameMatch = item.nome?.toLowerCase().includes(searchTerm.value.toLowerCase())
+    const caMatch = item.numero_ca?.toString().includes(searchTerm.value)
+    return nameMatch || caMatch
+  })
+})
+
+// Formatação de Data
+function formatDate(dateString) {
+  if (!dateString) return '-'
+  const [year, month, day] = dateString.split('-')
+  return `${day}/${month}/${year}`
 }
 
-const tableData = ref([
-  { id: 1, name: 'Óculos de Solda', ca: '22', expiration: '22/04/2026', quantity: 25, status: 'valid' },
-  { id: 2, name: 'Sapato Elétrico', ca: '12', expiration: '20/02/2026', quantity: 5, status: 'valid' },
-  { id: 3, name: 'Protetor Auricular', ca: '18', expiration: '15/01/2026', quantity: 12, status: 'expired' }
-])
+// Lógica de Status (Cores)
+function getStatusClass(dateString) {
+  if (!dateString) return 'valid'
+  const today = new Date()
+  const expiryDate = new Date(dateString)
+  const diffDays = (expiryDate - today) / (1000 * 60 * 60 * 24)
 
-const filteredData = computed(() =>
-  tableData.value.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.value.toLowerCase())
-  )
-)
-
-function formatCurrency(value) {
-  return value.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  if (diffDays < 0) return 'inactive' // Vencido
+  if (diffDays < 30) return 'warning' // A vencer (30 dias)
+  return 'active'
 }
 
-function getStatusText(status) {
-  return {
-    valid: 'Válido',
-    expiring: 'A vencer',
-    expired: 'Vencido'
-  }[status]
+function getStatusText(dateString) {
+  const status = getStatusClass(dateString)
+  if (status === 'inactive') return 'Vencido'
+  if (status === 'warning') return 'A vencer'
+  return 'Regular'
 }
+
+// Busca de Dados Integrada
+async function loadData() {
+  // 1. Buscar EPIs e métricas de estoque
+  const { data: epiData } = await supabase.from('epi').select('*').order('nome')
+  epis.value = epiData || []
+  
+  metrics.value.totalItems = epis.value.reduce((acc, curr) => acc + (curr.quantidade || 0), 0)
+  
+  // Contar vencidos
+  const today = new Date()
+  metrics.value.expiredEPIs = epis.value.filter(e => new Date(e.dt_validade) < today).length
+
+  // 2. Buscar Entregas com filtro de período
+  let deliveryQuery = supabase.from('entrega').select('id_entrega', { count: 'exact' })
+  
+  if (dateStart.value) deliveryQuery = deliveryQuery.gte('dt_entrega', dateStart.value)
+  if (dateEnd.value) deliveryQuery = deliveryQuery.lte('dt_entrega', dateEnd.value)
+  
+  const { count } = await deliveryQuery
+  metrics.value.totalDeliveries = count || 0
+}
+
+onMounted(loadData)
 </script>
 
-<style>
-
-/* BASE */
-body {
-  margin: 0;
-  font-family: 'Barlow', sans-serif;
-  background: #f3f3f3;
+<style scoped>
+:deep(:root), .page-container {
+  --primary: #FFCC00;
+  --primary-dark: #e6b800;
+  --background: #f4f4f4;
+  --background-light: #FFFDF2;
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --border-color: #ddd;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(90deg, #fdd017, #e6c200);
-  height: 60px;
+.page-container {
+  min-height: 100vh;
+  background: var(--background);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-bar {
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* CARDS ESTRUTURADOS */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.metrics-card {
+  background: var(--background-light);
+  padding: 25px;
+  border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
-  padding: 0 20px;
-  justify-content: space-between;
+  gap: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
 }
 
-.header h1 {
-  font-family: 'Bebas Neue', sans-serif;
+.card-yellow { border-bottom: 5px solid var(--primary); }
+.card-red { border-bottom: 5px solid #ef4444; }
+.card-green { border-bottom: 5px solid #22c55e; }
+
+.card-icon {
+  font-size: 40px;
 }
 
-/* CONTAINER */
-.container {
-  padding: 20px;
-  max-width: 1400px;
-  margin: auto;
+.card-info p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
 }
 
-/* TITLE */
-.title {
-  font-family: 'Bebas Neue';
-  font-size: 48px;
+.card-info h2 {
+  font-size: 28px;
+  margin: 5px 0;
 }
 
-.title-underline {
-  width: 80px;
-  height: 4px;
-  background: #fdd017;
-  margin-bottom: 20px;
-}
-
-/* CARDS */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.card {
-  background: #e9e9e9;
-  padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.card.yellow { border-left: 4px solid #fdd017; }
-.card.green { border-left: 4px solid #22c55e; }
-
-.card.alert {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  color: white;
-}
-
-.divider {
-  height: 1px;
-  background: #ccc;
-  margin: 10px 0;
-}
-
-/* FILTERS */
-.filters {
+/* FILTROS */
+.filters-bar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-  flex-wrap: wrap;
+  background: var(--background-light);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  gap: 20px;
+  align-items: flex-end;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
-input, select {
-  padding: 8px;
-  border: 1px solid #ccc;
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
 }
 
-/* TABLE */
+.filter-group label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.filter-group input {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.primary-btn {
+  background: var(--primary);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* TABELA */
 .table-container {
-  background: #e9e9e9;
-  overflow-x: auto;
+  background: var(--background-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 table {
@@ -237,64 +300,43 @@ table {
 }
 
 thead {
-  background: #fdd017;
+  background: var(--primary);
 }
 
-th, td {
-  padding: 10px;
+th {
+  padding: 15px;
   text-align: left;
-}
-
-tr {
-  border-bottom: 1px solid #ddd;
-}
-
-/* STATUS */
-.status {
-  padding: 4px 10px;
-  border-radius: 20px;
   font-size: 12px;
+  text-transform: uppercase;
 }
 
-.status.valid {
-  background: rgba(34,197,94,0.1);
-  color: green;
+td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
 }
 
-.status.expiring {
-  background: rgba(245,158,11,0.1);
-  color: orange;
+.status-chip {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-.status.expired {
-  background: rgba(239,68,68,0.1);
-  color: red;
-}
+.active { background: #c6f6d5; color: #22543d; }
+.warning { background: #fefcbf; color: #744210; }
+.inactive { background: #fed7d7; color: #822727; }
 
-/* FOOTER */
 .table-footer {
-  padding: 10px;
-  font-size: 13px;
+  padding: 15px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: #fcfcfc;
 }
 
-/* RESPONSIVO */
-@media (max-width: 1024px) {
-  .cards {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  .title {
-    font-size: 32px;
-  }
-
-  .header h1 {
-    font-size: 16px;
-  }
+@media (max-width: 768px) {
+  .filters-bar { flex-direction: column; align-items: stretch; }
+  .cards-grid { grid-template-columns: 1fr; }
 }
 </style>

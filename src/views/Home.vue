@@ -137,10 +137,10 @@ import Footer from '../components/Footer.vue';
 
 /* estilo do <div class="home"> */
 .home {
-  max-width: auto;                                                               /* largura máxima da página */
-  margin: auto;                                                                  /* centraliza na tela */
-  padding: 2rem;     
-  background-color: #FFFDF2;                                                              /* espaço interno */
+  max-width: auto;
+  margin: auto;
+  padding: var(--spacing-2xl);
+  background-color: var(--background-light);
 }
 
 /* estilo do <section class="home__hero"> */
@@ -152,14 +152,14 @@ import Footer from '../components/Footer.vue';
 }
 
 .home__menu {
-  display: flex;                                                                   /* texto e imagem lado a lado */
-  align-items: center;                                                             /* centraliza verticalmente */
-  justify-content: space-between;                                                  /* texto à esquerda, imagem à direita */
-  gap: 0;                                                                          /* sem espaço entre texto e imagem */
-  margin-bottom: 3rem;                                                             /* espaço abaixo da seção */
-  margin-left: calc(-50vw + 50%);                                                  /* centraliza o full width */
-  position: relative;  
-  background-color: #FFFDF2;                                                            /* para posicionamento */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  margin-bottom: var(--spacing-3xl);
+  margin-left: calc(-50vw + 50%);
+  position: relative;
+  background-color: var(--background-light);
 }
 
 .home__hero-texto { flex: 1; }                                                    /* ocupa metade do espaço */
@@ -171,17 +171,19 @@ import Footer from '../components/Footer.vue';
 
 /* estilo do <h1> dentro de .home__menu-texto */
 .home__menu-texto h1 {
-  font-size: 3rem;                                                                 /* tamanho do título */
-  color: #000000;                                                                  /* azul escuro institucional */
-  margin-bottom: 2rem;                                                             /* espaço aumentado abaixo do título */
+  font-size: 3rem;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2xl);
 }
 
 /* estilo do <p> dentro de .home__menu-texto */
 .home__menu-texto p {
-  font-size: 1.5rem;                                                                 /* tamanho do texto */
-  color: #000000;                                                                     /* cinza médio */
-  line-height: 1.7;                                                                /* espaço entre linhas */
-  margin-bottom: 2em;                                                           /* espaço aumentado abaixo do parágrafo */
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2em;
 }
 
 /* estilo do <img class="home__hero-img"> */
@@ -203,43 +205,45 @@ import Footer from '../components/Footer.vue';
 
 /* estilo do <div class="card"> */
 .card, .card3 {
-  display: flex;                                                                   /* empilha os filhos */
-  flex-direction: column;                                                          /* ícone, número e label um abaixo do outro */
-  align-items: center;                                                             /* centraliza horizontalmente */
-  padding: 1.5rem;                                                                 /* espaço interno do card */
-  background: #ffffff;                                                             /* fundo branco */
-  border: 1px solid #E2E8F0;                                                       /* borda cinza clara */
-  border-radius: 12px;                                                             /* cantos arredondados */
-  min-height: 500px;                                                               /* altura mínima para alinhar botões */
-  justify-content: space-between;                                                  /* distribui espaço entre elementos */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
-  transition: transform 0.3s ease, box-shadow 0.3s ease;    
-                                   /* sombra suave */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2xl);
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  min-height: 500px;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card3:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
+
 .card2:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
+
 .card:hover {
   transform: translateY(-10px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .card2 {
-  display: flex;                                                                   /* empilha os filhos */
-  flex-direction: column;                                                          /* ícone, número e label um abaixo do outro */
-  align-items: center;                                                             /* centraliza horizontalmente */
-  padding: 1.5rem;                                                                 /* espaço interno do card */
-  background: #000000;                                                             /* fundo branco */
-  border: 1px solid #ffffff;                                                       /* borda cinza clara */
-  border-radius: 12px;    
-  min-height: 500px;                                                               /* altura mínima para alinhar botões */
-  justify-content: space-between;                                                  /* distribui espaço entre elementos */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);                                       /* sombra mais intensa para card escuro */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2xl);
+  background: var(--text-primary);
+  border: 1px solid white;
+  border-radius: var(--radius-lg);
+  min-height: 500px;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* estilo do <div class="card card--alerta"> */
@@ -256,20 +260,17 @@ import Footer from '../components/Footer.vue';
 
 /* estilo do <span class="card__numero"> */
 .card__numero1, .card__numero2, .card__numero3 {
-  font-size: 2rem;                                                                 /* número grande em destaque */
-  font-weight: 700;                                                                /* número em negrito */
-  color: #000000;     
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}                                                             /* azul escuro */
-
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
 
 /* estilo do <span class="card__label"> */
 .card__label {
-  font-size: 2rem;                                                                 /* texto maior */
-  color: #000000;                                                                     /* cinza médio */
-  margin-top: 10px;                                                                /* espaço aumentado acima do texto */
-  line-height: 1.8;                                                                /* espaçamento entre linhas */
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-top: var(--spacing-xl);
+  line-height: 1.8;
 }
 
 /* estilo do <section class="home__instrucoes"> */
@@ -342,10 +343,10 @@ import Footer from '../components/Footer.vue';
 
 /* Linha divisória entre seções */
 .section__divider {
-  width: 80%;                                                                      /* ocupa 80% da largura */
-  height: 2px;                                                                     /* altura da linha */
-  background: linear-gradient(to right, transparent, #000000, transparent);       /* gradiente preto */
-  margin: 2rem auto;                                                               /* centraliza com margem */
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--text-primary), transparent);
+  margin: var(--spacing-2xl) auto;
 }
 
 /* Estilos para Cards de Funcionalidades */
@@ -353,9 +354,9 @@ import Footer from '../components/Footer.vue';
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  margin-bottom: 3rem;
-  margin-top: 3rem;
+  gap: var(--spacing-3xl);
+  margin-bottom: var(--spacing-3xl);
+  margin-top: var(--spacing-3xl);
 }
 
 .first_card_funcionalidades {
@@ -365,24 +366,26 @@ import Footer from '../components/Footer.vue';
 
 .first_card_funcionalidades h1 {
   font-size: 2.5rem;
-  color: #000000;
-  margin-bottom: 1rem;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
 }
 
 .funcionalidades_grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: var(--spacing-2xl);
   width: 100%;
 }
 
 .card_funcionalidade {
-  background: #ffffff;
-  border: 1px solid #E2E8F0;
-  border-radius: 12px;
-  padding: 2rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -393,63 +396,68 @@ import Footer from '../components/Footer.vue';
 
 .icon_funcionalidade {
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .card_funcionalidade h3 {
   font-size: 1.5rem;
-  color: #000000;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-xl);
 }
 
 .card_funcionalidade p {
   font-size: 1rem;
-  color: #555555;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
 .home__menu-texto {
-  margin-left: 10rem; 
+  margin-left: 10rem;
   font-size: 1.75rem;
   width: 100%;
+}
 
-    
-}        
 .button_Comece_agora {
-  background-color: #000000;
+  background-color: var(--primary);
   width: 10rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
+  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   text-decoration: none;
-  color: white;
+  color: var(--text-primary);
+  border: none;
+  transition: background 0.2s;
+}
 
+.button_Comece_agora:hover {
+  background-color: var(--primary-dark);
 }                  
 
 
 
 .card__label1 {
-  font-size: 2rem;
-  color: #000000;
-  margin-top: 4rem;
-  gap:  1.75rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-top: var(--spacing-xl);
 }
 
 .card__label2 {
-  font-size: 2rem;
-  color: #000000;
-  margin-top: 10px;
-  gap:  1.75rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-top: var(--spacing-md);
 }
+
 .card__label3 {
-  font-size: 2rem;
-  color: #000000;
-  margin-top: 10px;
-  gap: 1.75rem;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-top: var(--spacing-md);
 }
 
 .card2 .card__numero2,
@@ -458,57 +466,74 @@ import Footer from '../components/Footer.vue';
 .card2 .card__label1,
 .card2 .card__label2,
 .card2 .card__label3 {
-  color: #ffffff;
-  font-size: 2rem;
+  color: white;
+  font-size: 1.25rem;
 }
 
 .card .card__valor1 {
-  color: #000000;
+  color: var(--text-primary);
   font-size: 2rem;
+  font-weight: var(--font-weight-bold);
 }
+
 .card3 .card__valor1 {
-  color: #000000;
+  color: var(--text-primary);
   font-size: 2rem;
+  font-weight: var(--font-weight-bold);
 }
 
 .card__preco {
   display: flex;
   align-items: baseline;
   justify-content: center;
-  gap: 0.2rem;
+  gap: var(--spacing-sm);
   flex-wrap: nowrap;
   white-space: nowrap;
 }
 
-.button_solicitar_orcamento1 , .button_solicitar_orcamento3{
-  background-color: #000000;
+.button_solicitar_orcamento1, .button_solicitar_orcamento3 {
+  background-color: var(--primary);
   width: 10rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   text-decoration: none;
-  color: white;
-    margin-top: 3rem;
+  color: var(--text-primary);
+  border: none;
+  transition: background 0.2s;
+  margin-top: var(--spacing-2xl);
+}
+
+.button_solicitar_orcamento1:hover,
+.button_solicitar_orcamento3:hover {
+  background-color: var(--primary-dark);
 }
 
 .button_solicitar_orcamento2 {
-  background-color: #ffffff;
+  background-color: white;
   width: 10rem;
   height: 3rem;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
   text-decoration: none;
-  color: rgb(0, 0, 0);
-  gap: 2rem;
-  margin-top: 2rem;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  transition: background 0.2s;
+  margin-top: var(--spacing-xl);
+}
+
+.button_solicitar_orcamento2:hover {
+  background-color: var(--background);
 }
 
 /* Media queries para responsividade */
