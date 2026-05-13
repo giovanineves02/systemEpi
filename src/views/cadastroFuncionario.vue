@@ -184,7 +184,7 @@ function getSectorName(sectorId) {
 }
 
 async function loadSectors() {
-  const { data, error } = await supabase.from('setor').select('*').order('nome_setor')
+  const { data, error } = await supabase.from('setor', { schema: 'gestao_epis' }).select('*').order('nome_setor')
   if (error) {
     message.value = 'Erro ao carregar setores.'
     return
@@ -193,7 +193,7 @@ async function loadSectors() {
 }
 
 async function loadEmployees() {
-  const { data, error } = await supabase.from('funcionario').select('*').order('nome')
+  const { data, error } = await supabase.from('funcionario', { schema: 'gestao_epis' }).select('*').order('nome')
   if (error) {
     message.value = 'Erro ao carregar funcionários.'
     employees.value = []
@@ -218,7 +218,7 @@ async function saveEmployee() {
     status: employeeForm.status === 'ativo'
   }
 
-  const { error } = await supabase.from('funcionario').insert([payload])
+  const { error } = await supabase.from('funcionario', { schema: 'gestao_epis' }).insert([payload])
   loading.value = false
 
   if (error) {
@@ -236,7 +236,7 @@ async function deleteEmployee(id) {
   const confirmed = window.confirm('Deseja remover este funcionário?')
   if (!confirmed) return
 
-  const { error } = await supabase.from('funcionario').delete().eq('id_funcionario', id)
+  const { error } = await supabase.from('funcionario', { schema: 'gestao_epis' }).delete().eq('id_funcionario', id)
   if (error) {
     message.value = 'Erro ao remover funcionário.'
     return

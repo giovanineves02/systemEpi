@@ -65,6 +65,7 @@ CREATE TABLE gestao_epis.entrega (
     id_epi INT NOT NULL,
     id_estoque INT,
     dt_entrega DATE NOT NULL,
+    quantidade INT DEFAULT 1 NOT NULL,
     dt_devolucao DATE,
     observacao TEXT,
     assinatura BOOLEAN DEFAULT FALSE NOT NULL,

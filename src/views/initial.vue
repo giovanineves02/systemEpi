@@ -145,7 +145,7 @@ function getStatusText(dateString) {
 // Busca de Dados Integrada
 async function loadData() {
   // 1. Buscar EPIs e métricas de estoque
-  const { data: epiData } = await supabase.from('epi').select('*').order('nome')
+  const { data: epiData } = await supabase.from('epi', { schema: 'gestao_epis' }).select('*').order('nome')
   epis.value = epiData || []
   
   metrics.value.totalItems = epis.value.reduce((acc, curr) => acc + (curr.quantidade || 0), 0)
@@ -155,7 +155,7 @@ async function loadData() {
   metrics.value.expiredEPIs = epis.value.filter(e => new Date(e.dt_validade) < today).length
 
   // 2. Buscar Entregas com filtro de período
-  let deliveryQuery = supabase.from('entrega').select('id_entrega', { count: 'exact' })
+  let deliveryQuery = supabase.from('entrega', { schema: 'gestao_epis' }).select('id_entrega', { count: 'exact' })
   
   if (dateStart.value) deliveryQuery = deliveryQuery.gte('dt_entrega', dateStart.value)
   if (dateEnd.value) deliveryQuery = deliveryQuery.lte('dt_entrega', dateEnd.value)

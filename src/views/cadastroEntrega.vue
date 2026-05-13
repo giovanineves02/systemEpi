@@ -194,18 +194,32 @@ function formatDate(dateString) {
 }
 
 async function loadEmployees() {
-  const { data } = await supabase.from('funcionario').select('*').order('nome')
+  const { data, error } = await supabase.from('funcionario', { schema: 'gestao_epis' }).select('*').order('nome')
+  if (error) console.error('Erro ao carregar funcionários:', error)
   employees.value = data || []
 }
 
 async function loadEpis() {
-  const { data } = await supabase.from('epi').select('*').order('nome')
+  const { data, error } = await supabase.from('epi', { schema: 'gestao_epis' }).select('*').order('nome')
+  if (error) console.error('Erro ao carregar EPIs:', error)
   epis.value = data || []
 }
 
 async function loadDeliveries() {
-  const { data } = await supabase.from('entrega').select('*').order('dt_entrega', { ascending: false })
+  const { data, error, status } = await supabase
+    .from('entrega', { schema: 'gestao_epis' })
+    .select('*')
+    .order('dt_entrega', { ascending: false })
+  
+  console.log('loadDeliveries - Status:', status, 'Erro:', error, 'Dados:', data)
+  
+  if (error) {
+    console.error('Erro ao carregar entregas:', error)
+    return
+  }
+  
   deliveries.value = data || []
+  console.log('Total de entregas carregadas:', deliveries.value.length)
 }
 
 async function loadAll() {
@@ -219,22 +233,43 @@ async function saveDelivery() {
   }
 
   loading.value = true
-  const { error } = await supabase.from('entrega').insert([deliveryForm])
-  loading.value = false
-
+  
+  // Preparar dados, convertendo strings vazias em null para campos de data opcionais
+  const dataToSave = {
+    id_funcionario: deliveryForm.id_funcionario,
+    id_epi: deliveryForm.id_epi,
+    id_estoque: deliveryForm.id_estoque || null,
+    dt_entrega: deliveryForm.dt_entrega,
+    quantidade: deliveryForm.quantidade,
+    dt_devolucao: deliveryForm.dt_devolucao || null, // Converte string vazia para null
+    observacao: deliveryForm.observacao || null,
+    assinatura: deliveryForm.assinatura
+  }
+  
+  const { error } = await supabase.from('entrega', { schema: 'gestao_epis' }).insert([dataToSave])
+  
   if (error) {
-    message.value = 'Erro ao salvar entrega.'
+    loading.value = false
+    console.error('Erro ao salvar entrega:', error)
+    message.value = 'Erro ao salvar entrega: ' + error.message
     return
   }
 
   message.value = 'Entrega cadastrada com sucesso.'
-  await loadDeliveries()
   showForm.value = false
+  resetForm()
+  
+  // Aguarda um pouco para garantir que o banco processou a inserção
+  await new Promise(resolve => setTimeout(resolve, 500))
+  
+  // Recarrega as entregas
+  await loadDeliveries()
+  loading.value = false
 }
 
 async function deleteDelivery(id) {
   if (!window.confirm('Deseja remover esta entrega?')) return
-  const { error } = await supabase.from('entrega').delete().eq('id_entrega', id)
+  const { error } = await supabase.from('entrega', { schema: 'gestao_epis' }).delete().eq('id_entrega', id)
   if (error) {
     message.value = 'Erro ao remover.'
     return

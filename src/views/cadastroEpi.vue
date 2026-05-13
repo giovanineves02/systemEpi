@@ -93,7 +93,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="epi in filteredEpis" :key="epi.id">
+            <tr v-for="epi in filteredEpis" :key="epi.id_epi">
               <td><strong>{{ epi.nome }}</strong></td>
               <td>{{ epi.categoria }}</td>
               <td>{{ epi.quantidade }}</td>
@@ -101,7 +101,7 @@
               <td>{{ epi.fabricante }}</td>
               <td>{{ formatDate(epi.dt_validade) }}</td>
               <td class="epi-actions">
-                <button class="small-btn" @click="deleteEpi(epi.id)">Remover</button>
+                <button class="small-btn" @click="deleteEpi(epi.id_epi)">Remover</button>
               </td>
             </tr>
             <tr v-if="filteredEpis.length === 0">
@@ -182,7 +182,7 @@ function formatDate(dateString) {
 }
 
 async function loadEpis() {
-  const { data, error } = await supabase.from('epi').select('*').order('nome')
+  const { data, error } = await supabase.from('epi', { schema: 'gestao_epis' }).select('*').order('nome')
   if (error) {
     message.value = 'Erro ao carregar EPIs.'
     return
@@ -197,7 +197,7 @@ async function saveEpi() {
   }
 
   loading.value = true
-  const { error } = await supabase.from('epi').insert([epiForm])
+  const { error } = await supabase.from('epi', { schema: 'gestao_epis' }).insert([epiForm])
   loading.value = false
 
   if (error) {
@@ -212,7 +212,7 @@ async function saveEpi() {
 
 async function deleteEpi(id) {
   if (!window.confirm('Deseja remover este EPI?')) return
-  const { error } = await supabase.from('epi').delete().eq('id', id)
+  const { error } = await supabase.from('epi', { schema: 'gestao_epis' }).delete().eq('id_epi', id)
   if (error) {
     message.value = 'Erro ao remover.'
     return
