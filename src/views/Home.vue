@@ -13,7 +13,7 @@
             Gerencie entregas, validade e rastreabilidade de equipamentos de proteção 
             individual de forma simples, eficiente e segura.
           </p>
-          <router-link to="/login">
+          <router-link to="/login2">
             <button class="btn-main-cta">Comece agora</button>
           </router-link>
         </div>
@@ -172,7 +172,8 @@ const features = [
 .hero__subtitle { font-size: 1.8rem; color: #666; display: block; margin-top: 10px; }
 .hero__description { font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 40px; }
 .btn-main-cta {
-  background-color: var(--primary);
+  background-color: #000000;
+  color: #ffffff;
   border: none;
   padding: 18px 40px;
   border-radius: 12px;
@@ -181,7 +182,7 @@ const features = [
   cursor: pointer;
   transition: 0.3s;
 }
-.btn-main-cta:hover { background-color: var(--primary-dark); transform: translateY(-3px); }
+.btn-main-cta:hover { background-color: #000000; color: #ffffff; transform: translateY(-3px); }
 .hero__img { width: 100%; max-width: 550px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
 
 /* --- Pricing Cards --- */
