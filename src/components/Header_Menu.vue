@@ -1,196 +1,11 @@
-<template>
-  <div>
-
-    <header class="header">
-
-      <button
-        class="hamburger"
-        :class="{ active: menuOpen }"
-        @click="toggleMenu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="logo-container">
-        <div class="logo-icon">
-          <img src="../assets/logo.png" alt="Logo">
-        </div>
-
-        <h2 class="logo-text">SAFETY STOCK EPI</h2>
-      </div>
-
-      <div class="user-menu" v-if="session">
-        <button @click="toggleProfileModal" class="user-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-
-            <path
-              d="M20.59 22C20.59 18.13 16.74 15 12 15C7.26 15 3.41 18.13 3.41 22"
-              stroke="black"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-
-    </header>
-
-    <aside class="sidebar" :class="{ open: menuOpen }">
-
-      <router-link to="/initial" class="menu-link">
-        Relatórios
-      </router-link>
-
-      <router-link to="/cadastroFuncionario" class="menu-link">
-        Cadastro Funcionário
-      </router-link>
-
-      <router-link to="/cadastroEpi" class="menu-link">
-        Cadastro EPI
-      </router-link>
-
-      <router-link to="/cadastroEntrega" class="menu-link">
-        Cadastro Entrega
-      </router-link>
-
-    </aside>
-
-    <div
-      v-if="profileModal"
-      class="modal-overlay"
-      @click="closeProfileModal"
-    >
-
-      <div
-        class="profile-modal"
-        @click.stop
-      >
-
-        <div class="profile-avatar">
-
-          <svg width="55" height="55" viewBox="0 0 24 24" fill="none">
-
-            <path
-              d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
-              stroke="#6B7280"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-
-            <path
-              d="M20.59 22C20.59 18.13 16.74 15 12 15C7.26 15 3.41 18.13 3.41 22"
-              stroke="#6B7280"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-
-          </svg>
-
-        </div>
-
-        <h2 class="user-name">
-          {{ userName }}
-        </h2>
-
-        <p class="user-email">
-          {{ session?.user?.email }}
-        </p>
-
-        <div class="input-group">
-
-          <label>Senha Atual</label>
-
-          <div class="password-input">
-
-            <input
-              :type="showCurrentPassword ? 'text' : 'password'"
-              v-model="currentPassword"
-              placeholder="Digite sua senha atual"
-            >
-
-            <button @click="showCurrentPassword = !showCurrentPassword">
-              👁
-            </button>
-
-          </div>
-
-        </div>
-
-        <div class="input-group">
-
-          <label>Nova Senha</label>
-
-          <div class="password-input">
-
-            <input
-              :type="showNewPassword ? 'text' : 'password'"
-              v-model="newPassword"
-              placeholder="Digite sua nova senha"
-            >
-
-            <button @click="showNewPassword = !showNewPassword">
-              👁
-            </button>
-
-          </div>
-
-        </div>
-
-        <div class="input-group">
-
-          <label>Confirmar Nova Senha</label>
-
-          <div class="password-input">
-
-            <input
-              :type="showConfirmPassword ? 'text' : 'password'"
-              v-model="confirmPassword"
-              placeholder="Confirme sua nova senha"
-            >
-
-            <button @click="showConfirmPassword = !showConfirmPassword">
-              👁
-            </button>
-
-          </div>
-
-        </div>
-
-        <button
-          class="save-btn"
-          @click="updatePassword"
-        >
-          Salvar Alterações
-        </button>
-
-        <button
-          class="logout-btn-modal"
-          @click="logout"
-        >
-          Sair
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-</template>
-
 <script setup>
-import { ref, computed } from 'vue'
+import {
+  ref,
+  computed,
+  onMounted,
+  onBeforeUnmount
+} from 'vue'
+
 import { useRouter } from 'vue-router'
 import { useSupabase } from '../composables/useSupabase.js'
 
@@ -200,6 +15,12 @@ const router = useRouter()
 
 const menuOpen = ref(false)
 const profileModal = ref(false)
+
+const sidebarRef = ref(null)
+const hamburgerRef = ref(null)
+
+const profileRef = ref(null)
+const userIconRef = ref(null)
 
 const currentPassword = ref('')
 const newPassword = ref('')
@@ -222,16 +43,70 @@ const userName = computed(() => {
 })
 
 function toggleMenu() {
+
   menuOpen.value = !menuOpen.value
+
+  if (menuOpen.value) {
+    profileModal.value = false
+  }
+
 }
 
 function toggleProfileModal() {
+
   profileModal.value = !profileModal.value
+
+  if (profileModal.value) {
+    menuOpen.value = false
+  }
+
 }
 
 function closeProfileModal() {
   profileModal.value = false
 }
+
+function closeAllMenus(event) {
+
+  const clickedSidebar =
+    sidebarRef.value?.contains(event.target)
+
+  const clickedHamburger =
+    hamburgerRef.value?.contains(event.target)
+
+  const clickedProfile =
+    profileRef.value?.contains(event.target)
+
+  const clickedUserIcon =
+    userIconRef.value?.contains(event.target)
+
+  if (!clickedSidebar && !clickedHamburger) {
+    menuOpen.value = false
+  }
+
+  if (!clickedProfile && !clickedUserIcon) {
+    profileModal.value = false
+  }
+
+}
+
+onMounted(() => {
+
+  document.addEventListener(
+    'click',
+    closeAllMenus
+  )
+
+})
+
+onBeforeUnmount(() => {
+
+  document.removeEventListener(
+    'click',
+    closeAllMenus
+  )
+
+})
 
 async function updatePassword() {
 
@@ -254,13 +129,198 @@ async function updatePassword() {
   currentPassword.value = ''
   newPassword.value = ''
   confirmPassword.value = ''
+
 }
 
 async function logout() {
+
   await supabase.auth.signOut()
+
   router.push('/login2')
+
 }
 </script>
+
+<template>
+  <div>
+
+    <header class="header">
+
+      <button
+        ref="hamburgerRef"
+        class="hamburger"
+        :class="{ active: menuOpen }"
+        @click.stop="toggleMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <div class="logo-container">
+
+        <div class="logo-icon">
+          <img src="../assets/logo.png" alt="Logo">
+        </div>
+
+        <div class="logo-text">
+          Sistema de Gestão
+        </div>
+
+      </div>
+
+      <div class="user-menu">
+
+        <button
+          ref="userIconRef"
+          class="user-icon"
+          @click.stop="toggleProfileModal"
+        >
+          👤
+        </button>
+
+      </div>
+
+    </header>
+
+    <aside
+      ref="sidebarRef"
+      class="sidebar"
+      :class="{ open: menuOpen }"
+    >
+
+      <router-link
+        to="/dashboard"
+        class="menu-link"
+      >
+        Dashboard
+      </router-link>
+
+      <router-link
+        to="/usuarios"
+        class="menu-link"
+      >
+        Usuários
+      </router-link>
+
+      <router-link
+        to="/configuracoes"
+        class="menu-link"
+      >
+        Configurações
+      </router-link>
+
+    </aside>
+
+    <div
+      v-if="profileModal"
+      class="modal-overlay"
+    >
+
+      <div
+        ref="profileRef"
+        class="profile-modal"
+        @click.stop
+      >
+
+        <div class="profile-avatar">
+          👤
+        </div>
+
+        <div class="user-name">
+          {{ userName }}
+        </div>
+
+        <div class="user-email">
+          {{ session?.user?.email }}
+        </div>
+
+        <div class="input-group">
+
+          <label>Senha Atual</label>
+
+          <div class="password-input">
+
+            <input
+              :type="showCurrentPassword ? 'text' : 'password'"
+              v-model="currentPassword"
+            >
+
+            <button
+              type="button"
+              @click="showCurrentPassword = !showCurrentPassword"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Nova Senha</label>
+
+          <div class="password-input">
+
+            <input
+              :type="showNewPassword ? 'text' : 'password'"
+              v-model="newPassword"
+            >
+
+            <button
+              type="button"
+              @click="showNewPassword = !showNewPassword"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Confirmar Nova Senha</label>
+
+          <div class="password-input">
+
+            <input
+              :type="showConfirmPassword ? 'text' : 'password'"
+              v-model="confirmPassword"
+            >
+
+            <button
+              type="button"
+              @click="showConfirmPassword = !showConfirmPassword"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <button
+          class="save-btn"
+          @click="updatePassword"
+        >
+          Salvar Senha
+        </button>
+
+        <button
+          class="logout-btn-modal"
+          @click="logout"
+        >
+          Sair
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+</template>
 
 <style scoped>
 
@@ -268,6 +328,8 @@ async function logout() {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
 }
 
 .header {
@@ -294,6 +356,8 @@ async function logout() {
   gap: 10px;
 
   margin-right: auto;
+
+  min-width: 0;
 }
 
 .logo-icon img {
@@ -301,8 +365,14 @@ async function logout() {
 }
 
 .logo-text {
-  font-weight: bold;
+  font-weight: 700;
   font-size: 18px;
+
+  letter-spacing: 0.5px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-menu {
@@ -312,6 +382,7 @@ async function logout() {
 .user-icon {
   background: none;
   border: none;
+
   cursor: pointer;
 
   padding: 5px;
@@ -319,6 +390,16 @@ async function logout() {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 10px;
+
+  transition: background 0.2s ease;
+
+  font-size: 22px;
+}
+
+.user-icon:hover {
+  background: rgba(0,0,0,0.08);
 }
 
 .hamburger {
@@ -333,6 +414,8 @@ async function logout() {
 
   background: none;
   border: none;
+
+  z-index: 1002;
 }
 
 .hamburger span {
@@ -361,11 +444,11 @@ async function logout() {
 .sidebar {
   position: fixed;
 
-  top: 0;
-  left: -250px;
+  top: 70px;
+  left: -280px;
 
   width: 260px;
-  height: 100vh;
+  height: calc(100vh - 70px);
 
   background: #111111;
   color: white;
@@ -393,10 +476,11 @@ async function logout() {
   text-decoration: none;
 
   font-weight: 600;
+  font-size: 15px;
 
   margin-bottom: 18px;
 
-  padding: 10px 14px;
+  padding: 12px 14px;
 
   border-radius: 12px;
 
@@ -447,6 +531,8 @@ async function logout() {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  font-size: 30px;
 }
 
 .user-name {
@@ -595,14 +681,38 @@ async function logout() {
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+
+  .header {
+    padding: 0 14px;
+  }
 
   .logo-text {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .logo-icon img {
-    width: 40px;
+    width: 42px;
+  }
+
+  .sidebar {
+    width: 230px;
+  }
+
+  .profile-modal {
+    width: 320px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .logo-text {
+    font-size: 13px;
+  }
+
+  .logo-icon img {
+    width: 38px;
   }
 
   .modal-overlay {
@@ -611,8 +721,14 @@ async function logout() {
   }
 
   .profile-modal {
-    width: 94vw;
+    width: calc(100vw - 20px);
+    max-width: 360px;
+
     padding: 18px;
+  }
+
+  .user-name {
+    font-size: 20px;
   }
 
 }

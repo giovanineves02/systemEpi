@@ -234,6 +234,9 @@ onMounted(loadEpis)
   --border-color: #ddd;
   --radius-md: 8px;
   --radius-lg: 12px;
+  font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .page-container {
@@ -253,14 +256,9 @@ onMounted(loadEpis)
 }
 
 .top-bar h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.content {
-  width: 100%;
-  max-width: 1200px;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 .actions {
@@ -276,7 +274,8 @@ onMounted(loadEpis)
   padding: 12px 24px;
   border-radius: var(--radius-md);
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   font-size: 13px;
   transition: all 0.2s;
@@ -327,16 +326,21 @@ onMounted(loadEpis)
 .filter-group label {
   font-size: 13px;
   font-weight: 600;
+  color: var(--text-secondary);
 }
 
-.filter-group input, .filter-group select {
+.filter-group input,
+.filter-group select {
   padding: 10px;
   border: 2px solid #eee;
   border-radius: var(--radius-md);
   background: #fff;
+  font-family: inherit;
+  font-size: 14px;
 }
 
-.filter-group input:focus, .filter-group select:focus {
+.filter-group input:focus,
+.filter-group select:focus {
   outline: none;
   border-color: var(--primary);
 }
@@ -367,7 +371,9 @@ thead {
 th {
   padding: 15px 20px;
   text-align: left;
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
   color: #000;
 }
@@ -376,6 +382,11 @@ td {
   padding: 15px 20px;
   border-bottom: 1px solid var(--border-color);
   font-size: 14px;
+  color: #222;
+}
+
+td strong {
+  font-weight: 600;
 }
 
 tbody tr:hover {
@@ -390,6 +401,7 @@ tbody tr:hover {
   border-radius: 6px;
   cursor: pointer;
   font-size: 12px;
+  transition: 0.2s;
 }
 
 .small-btn:hover {
@@ -404,6 +416,9 @@ tbody tr:hover {
 }
 
 @media (max-width: 768px) {
-  .filters { flex-direction: column; align-items: stretch; }
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 </style>
